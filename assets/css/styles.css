@@ -54,3 +54,16 @@ body{font-family:"Segoe UI",Arial,Helvetica,sans-serif}
 .field input,.field select{width:100%;min-width:0}
 .modal-card{max-height:calc(100vh - 40px);overflow:auto}
 @media(max-width:700px){.modal{place-items:end center;padding:12px}.modal-card{padding:20px}.modal-card .form-grid{grid-template-columns:1fr}}
+
+/* Shared logo component, identical to the dashboard. */
+.sidebar-brand{display:flex;align-items:center;text-decoration:none;color:inherit;min-height:48px;margin-top:4px;padding:0 4px 0 14px}
+.sidebar-brand .colored-logo{display:block;width:150px;height:36px;max-width:100%;flex-shrink:0;overflow:visible}
+.sidebar .nav{gap:7px}
+.sidebar .nav a{padding:0 15px;min-height:47px;gap:12px;font-size:13px;font-weight:500;color:#d2eadb}
+.sidebar .nav a.active{background:var(--paper);color:#245d46;font-weight:600}
+@media(min-width:701px){.sidebar{gap:28px}}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.sidebar .nav svg{opacity:.85;stroke-width:1.65}
+.sidebar .nav a.active svg{opacity:1;stroke-width:1.9}
+.sidebar .nav a.active{position:relative;z-index:2}
+.main{box-shadow:none}
