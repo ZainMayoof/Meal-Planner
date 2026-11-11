@@ -63,6 +63,25 @@
   .auth-signup .form{padding-top:24px;padding-bottom:24px}
 }
 </style>
+<style id="full-screen-auth">
+/* Full-screen layout and colours matched to the app pages (assets/css/styles.css). */
+body{background:#fffdf8;color:#203b2e}
+.auth,.auth.auth-signup{padding:0;min-height:100vh;align-items:stretch}
+.auth .card{width:100%;max-width:none;min-height:100vh;height:auto;border:0;border-radius:0;box-shadow:none;background:#fffdf8}
+.intro{background:#245d46;color:#fff}
+.form{background:#fffdf8}
+.form h2{color:#203b2e}
+.kicker{color:#5a685a}
+.field label{color:#536553}
+.field input,.field select{border-color:#dfe7dc;background-color:#fff;color:#203b2e;font:inherit}
+.submit{background:#245d46;font:inherit;font-weight:700;cursor:pointer}
+.switch{color:#5a685a}
+.switch a,.form a{color:#245d46}
+.form input[type="checkbox"]{accent-color:#245d46}
+.form label[style]{color:#5a685a!important}
+@media(min-width:761px){.form,.auth-signup .form{padding-left:clamp(42px,6vw,96px);padding-right:clamp(42px,6vw,96px);justify-content:center}.form>*{width:100%;max-width:560px}}
+@media(min-width:761px) and (max-height:760px){.auth .card{min-height:100vh}}
+</style>
 <script src="../assets/js/validation.js"></script>
 <script>
 document.getElementById('sign-up-form').addEventListener('submit', event => {
