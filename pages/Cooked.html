@@ -1,0 +1,650 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Cooked &middot; Your meal planner</title><style>
+*{box-sizing:border-box}body{margin:0;background:#ffe6a0;color:#183d2c;font-family:Arial,Helvetica,sans-serif;font-size:15px}button,input,a{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #a4472e;outline-offset:4px}button{border:0;color:inherit}a{color:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:190px 1fr;max-width:1640px;margin:auto;padding:24px 24px 24px 0}.sidebar{padding:25px 16px;display:flex;flex-direction:column;gap:45px}.logo{width:145px;height:auto;mix-blend-mode:multiply}.nav{display:grid;gap:10px}.nav a{text-decoration:none;padding:15px 18px;display:flex;align-items:center;gap:14px;border-radius:18px;color:#4d624f}.nav a.active{background:#ff694a;color:white}.nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.foot{margin-top:auto;padding:25px 18px;font-size:12px;color:#6f745c;line-height:1.6}.main{background:#fffcf5;border-radius:35px;padding:32px 38px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:20px}.search{background:#f6f1e6;border:1px solid #eee6d6;padding:14px 20px;border-radius:30px;width:min(480px,70%);color:#354c3c}.profile{background:#f1ead9;border-radius:50%;width:42px;height:42px;font-weight:bold}.heading{display:flex;align-items:center;justify-content:space-between;margin:30px 0 24px;gap:15px}h1{font-family:Georgia,serif;font-size:62px;margin:0;letter-spacing:-2px;line-height:1}h2{font-size:22px;margin:0 0 20px;letter-spacing:-.5px}.primary{background:#fa6547;color:#fff;padding:15px 23px;border-radius:25px;font-weight:700}.date{font-size:13px;color:#7b8069;margin-top:12px}.content{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px}.meals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:20px}.meal{border-radius:25px;background:#fce0d1;padding:0 18px 20px;min-width:0;transition:transform .2s}.meal:hover{transform:translateY(-4px)}.meal:nth-child(2){background:#e8efcb}.meal:nth-child(3){background:#fff0bf}.meal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;margin-top:-20px;border:7px solid #fffdf7;box-shadow:0 7px 12px #183d2c15}.type{font-size:11px;font-weight:800;letter-spacing:1.2px;color:#a1442d;margin-top:22px}.meal h3{font-size:23px;letter-spacing:-.6px;margin:9px 0 10px;line-height:1.1;min-height:50px}.meta{font-size:13px;color:#66715d}.actions{display:flex;gap:7px;margin-top:24px;flex-wrap:wrap}.actions button{padding:10px 11px;background:#fffaf1;border-radius:18px;font-size:12px}.actions .cook{background:#fa6547;color:#fff;flex:1}.actions .cook.done{background:#416e4f}.rail{padding-top:0}.note{background:#f6f0e2;padding:22px;border-radius:24px;margin-bottom:20px}.note h2{font-size:20px}.expiry{display:flex;justify-content:space-between;gap:9px;align-items:center;background:#fffcf5;border-radius:16px;padding:16px 14px;margin-top:12px;font-size:14px}.expiry strong{display:block;color:#b54c33;font-size:12px;margin-top:5px}.ingredient{width:34px;height:34px;object-fit:contain}.budget{font-size:30px;font-weight:bold;margin:18px 0}.budget small{font-size:15px;font-weight:400}.budget span{color:#f16343}.progress{height:11px;background:#e5d9bd;border-radius:20px;overflow:hidden}.progress div{width:30%;height:100%;background:#f77753;border-radius:20px}.muted{color:#7b8069;font-size:13px}.listbutton{width:100%;background:none;text-align:left;display:flex;justify-content:space-between;padding:0;align-items:center}.listbutton strong{font-size:20px}.nutrition{margin:27px 0 30px;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #e9e0cd;border-bottom:1px solid #e9e0cd;flex-wrap:wrap}.nutrition span{font-size:14px;color:#65765d}.nutrition b{font-size:17px;color:#284a35}.weekheader{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}.weekheader h2{margin:0}.weekheader button{background:#f1ead7;padding:9px 15px;border-radius:20px}.week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.day{border-radius:20px;background:#f6f0e2;padding:15px 6px 10px;text-align:center}.day:hover{background:#f5dfc6}.day.selected{background:#fb7052;color:white}.day b{display:block;font-size:13px}.day span{display:block;font-size:23px;margin:7px}.day img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:3px solid #fff8eb}.day em{display:block;font-style:normal;font-size:10px;margin:6px 0 0;min-height:12px}.source{font-size:11px;color:#808673;margin-top:25px}.source a{text-underline-offset:3px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#244a35;color:white;padding:15px 24px;border-radius:16px;box-shadow:0 5px 30px #0002;z-index:5;display:none}dialog{border:0;border-radius:25px;padding:30px;max-width:440px;width:90%;color:#183d2c;background:#fffaf0}dialog::backdrop{background:#193b2d66}dialog ul{padding-left:20px;line-height:2.4}dialog button{padding:10px 20px;border-radius:20px;background:#e3ebd7} .hidden{display:none!important}
+@media(min-width:1500px){.main{padding:40px 50px}.meal h3{font-size:27px}.content{grid-template-columns:minmax(0,1fr) 300px}.meal{padding:0 23px 24px}}
+@media(max-width:1150px){.shell{grid-template-columns:155px 1fr}.sidebar{padding-left:10px}.logo{width:130px}.nav a{padding:13px 9px;gap:9px}.main{padding:25px}.content{grid-template-columns:1fr}.rail{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.note{margin:0}.rail .note:last-child{grid-column:1/-1}h1{font-size:52px}}
+@media(max-width:700px){.shell{display:block;padding:0}.sidebar{padding:17px;gap:14px}.logo{width:125px}.nav{display:flex;overflow-x:auto;gap:5px}.nav a{flex:none;padding:9px 12px;font-size:12px}.nav svg{display:none}.foot{display:none}.main{border-radius:25px 25px 0 0;padding:23px 18px}.heading{margin:25px 0}h1{font-size:42px}.primary{font-size:12px;padding:13px}.meals{gap:10px}.meal{padding:0 10px 15px;border-radius:18px}.meal img{border-width:4px}.meal h3{font-size:17px;min-height:39px}.type{font-size:9px;margin-top:14px}.meta{font-size:11px}.actions{margin-top:16px;gap:5px}.actions button{padding:9px 7px;font-size:10px}.nutrition{gap:12px;padding:16px 0}.nutrition strong{width:100%}.nutrition span{font-size:12px}.nutrition b{font-size:14px}.week{gap:5px}.day{border-radius:13px;padding:11px 2px}.day b{font-size:10px}.day img{width:32px;height:32px;border-width:2px}.day span{font-size:18px;margin:6px 0}.day em{font-size:8px}.rail{gap:10px}.note{padding:17px}.note h2{font-size:17px}.expiry{font-size:12px;padding:12px 9px}.ingredient{width:25px}.budget{font-size:25px}.search{font-size:13px}.weekheader h2{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style>
+body{background:#e7ece5}.shell{height:100vh;min-height:0;grid-template-columns:175px 1fr;padding:18px 18px 18px 0;max-width:1600px}.sidebar{padding:22px 15px;gap:35px}.main{padding:28px 34px;background:#fffdf8;border-radius:30px;display:flex;flex-direction:column;overflow:hidden}.heading{margin:0 0 20px}.heading h1{font-size:52px}.heading .date{margin-top:10px}.primary{background:#47735a;padding:14px 24px}.content{grid-template-columns:minmax(0,1fr) 255px;gap:25px;min-height:0;flex:1}.content>section{display:flex;flex-direction:column;min-height:0}.meals{flex:1;min-height:0;align-items:stretch;padding-top:12px}.meal{background:#f5e0d7;padding:0 17px 17px;display:flex;flex-direction:column}.meal:nth-child(2){background:#e6eddc}.meal:nth-child(3){background:#e4e9ee}.meal:hover{transform:none}.meal img{height:clamp(110px,23vh,230px);width:100%;aspect-ratio:auto;object-fit:cover;border-radius:50%;margin-top:-12px;box-shadow:none;border:5px solid #fffdf8}.type{margin-top:16px}.meal h3{font-size:clamp(18px,1.7vw,26px);min-height:0;line-height:1.1;margin:9px 0}.actions{margin-top:auto;padding-top:18px;display:flex;align-items:center;gap:8px;flex-wrap:nowrap}.actions svg{height:17px;width:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.swap{padding:9px;background:#fffaf4;border-radius:15px;display:flex}.actions .cook{padding:10px 9px;border-radius:18px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:6px;background:#47735a;white-space:nowrap}.nutrition{margin:19px 0;padding:16px 0;gap:10px}.weekheader{margin-bottom:12px}.weekheader h2{font-size:20px}.weekheader>div{background:none;padding:0;font-size:12px;color:#47735a}.day{padding:12px 4px 8px;background:#f0f2ec;border-radius:17px}.day.selected{background:#47735a;color:white}.day:hover{background:#f0f2ec}.day.selected:hover{background:#47735a}.day span{font-size:21px;margin:4px}.day img{width:47px;height:47px;border-color:#fffdf8}.day em{margin-top:3px}.note{background:#f0f2ec;padding:22px}.expiry{background:#fffdf8}.progress{background:#dbe3d5}.progress div{background:#77947b}.budget span{color:#47735a}.source{margin-top:15px;font-size:10px}.navitem{display:flex;align-items:center;gap:12px;padding:13px 14px;color:#566b5a;border-radius:15px;font-size:14px}.navitem.active{background:#47735a;color:#fff}.navitem svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.rail{display:block}.listbutton{display:flex}.budget{margin:16px 0} .logo{width:140px}button,a{cursor:default}
+@media(min-width:1000px) and (max-height:780px){.shell{padding-top:12px;padding-bottom:12px}.main{padding:22px 28px}.heading{margin-bottom:15px}.heading h1{font-size:44px}.meal img{height:21vh}.type{margin-top:12px}.meal h3{font-size:21px}.nutrition{margin:14px 0;padding:13px 0}.day{padding:9px 3px 6px}.day img{width:37px;height:37px}.note{padding:18px;margin-bottom:15px}.note h2{font-size:19px;margin-bottom:12px}.expiry{padding:12px;margin-top:10px}.source{margin-top:10px}.actions{padding-top:12px}.day em{min-height:10px}.weekheader h2{font-size:18px}}
+@media(max-width:1000px){.shell{grid-template-columns:145px 1fr;height:auto;min-height:100vh}.content{grid-template-columns:1fr}.rail{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.rail .note:last-child{grid-column:1/-1}.note{margin:0}.meal img{height:160px}.meals{flex:none}.main{overflow:visible}.navitem{font-size:12px;padding:12px 6px}.logo{width:125px}}
+@media(max-width:700px){.shell{display:block;padding:0}.sidebar{padding:15px;gap:15px}.nav{display:flex}.navitem{flex:none;padding:9px 12px}.navitem svg{display:none}.main{padding:22px 16px}.heading h1{font-size:40px}.primary{padding:12px 16px;font-size:12px}.meal{padding:0 10px 13px}.meal img{height:100px}.meal h3{font-size:17px}.actions{gap:4px;flex-wrap:wrap}.actions .cook{font-size:9px;padding:8px 6px}.swap{padding:7px}.actions svg{width:13px;height:13px}.nutrition strong{width:100%}.day img{width:30px;height:30px}.day b{font-size:10px}.weekheader h2{font-size:16px}.note{padding:17px}}
+</style><style id="plate-card-layout">
+.meals{padding-top:0}
+.meal{--card-color:#f5e0d7;--card-padding:17px;container-type:inline-size;position:relative;isolation:isolate;background:transparent;padding:0 var(--card-padding) 17px}
+.meal:nth-child(2){--card-color:#e6eddc;background:transparent}
+.meal:nth-child(3){--card-color:#e4e9ee;background:transparent}
+.meal::before{content:"";position:absolute;z-index:-1;inset:min(calc(50cqw - var(--card-padding)),115px) 0 0;background:var(--card-color);border-radius:inherit;pointer-events:none}
+.meal img{display:block;align-self:center;flex-shrink:0;width:100%;max-width:230px;height:auto;aspect-ratio:1;object-fit:contain;border:0;border-radius:0;box-shadow:none;margin:0}
+@media(max-width:700px){.meal{--card-padding:10px;padding-bottom:13px}}
+</style><style id="compact-meal-layout">
+.meals{flex:0 0 auto;align-items:start}
+.meal{height:100%}
+.meal .type{margin-top:8px}
+.meal h3{margin:7px 0}
+.meal .actions{margin-top:14px;padding-top:0}
+</style><style id="sidebar-refinement">
+.shell{grid-template-columns:210px minmax(0,1fr);gap:18px;padding:18px}
+.sidebar{background:#203e32;color:#eaf0e8;border-radius:26px;padding:26px 14px 22px;gap:0;min-width:0;box-shadow:0 8px 24px #183d2c0a}
+.sidebar-brand{margin:0 12px 36px;padding:13px 12px;background:#fffaf0;border-radius:16px;display:flex;align-items:center;justify-content:center}
+.sidebar .logo{display:block;width:132px;max-width:100%;height:auto;mix-blend-mode:normal}
+.sidebar-section-label{color:#a5b9ab;font-size:10px;font-weight:700;letter-spacing:1.7px;padding:0 16px;margin-bottom:14px}
+.sidebar .nav{display:grid;gap:7px}
+.sidebar .navitem{position:relative;display:flex;align-items:center;gap:12px;min-height:47px;padding:13px 15px;border-radius:12px;color:#c9d6cc;font-size:13px;font-weight:500;line-height:1.3;white-space:nowrap;transition:background .18s,color .18s}
+.sidebar .navitem svg{display:block;width:20px;height:20px;flex:0 0 20px;stroke-width:1.65;opacity:.85}
+.sidebar .navitem:hover{background:#ffffff0c;color:#fffaf0}
+.sidebar .navitem.active{background:#dfe9d8;color:#203e32;font-weight:700;box-shadow:0 3px 8px #10291d14}
+.sidebar .navitem.active svg{opacity:1;stroke-width:1.9}
+.sidebar-bottom{display:flex;align-items:center;gap:9px;margin-top:auto;padding:22px 12px 0;border-top:1px solid #ffffff15;color:#a5b9ab;font-size:11px;letter-spacing:.1px}
+.sidebar-status-dot{width:6px;height:6px;border-radius:50%;background:#a8c29a;flex-shrink:0}
+@media(max-width:1100px) and (min-width:701px){.shell{grid-template-columns:190px minmax(0,1fr);gap:14px;padding:14px}.sidebar{padding-left:10px;padding-right:10px}.sidebar .navitem{padding-left:12px;padding-right:12px}}
+@media(max-width:700px){.shell{display:block;padding:10px}.sidebar{padding:18px 14px 14px;border-radius:22px;margin-bottom:12px}.sidebar-brand{align-self:flex-start;margin:0 0 17px;padding:9px 12px;border-radius:11px}.sidebar .logo{width:112px}.sidebar-section-label,.sidebar-bottom{display:none}.sidebar .nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin;scrollbar-color:#557061 transparent}.sidebar .navitem{min-height:40px;padding:10px 12px;font-size:12px;gap:8px}.sidebar .navitem svg{display:block;width:17px;height:17px;flex-basis:17px}.main{border-radius:24px}}
+</style><style id="green-craft-theme">
+:root{--forest:#244934;--ink:#294b36;--sage:#dce6cc;--paper:#f5f7ec;--hand:"Segoe Print","Bradley Hand","Comic Sans MS",cursive}
+body{color:var(--ink);background-color:#cbd8bc;background-image:radial-gradient(#42603a12 .7px,transparent .7px);background-size:6px 6px}
+.main{background-color:var(--paper);background-image:radial-gradient(#45623a0b .65px,transparent .65px);background-size:5px 5px;border:1px solid #49654225;border-radius:30px 25px 34px 23px;box-shadow:0 5px 0 #60794c12}
+h1,h2,.meal h3,.weekheader h2,.listbutton strong{font-family:var(--hand);font-weight:700;letter-spacing:-.7px}
+.heading h1{font-size:47px;line-height:1.3;position:relative;display:inline-block}
+.heading h1::after{content:"";position:absolute;left:0;right:-8px;bottom:1px;height:6px;background:#a6bf89;opacity:.65;border-radius:65% 30% 55% 45%;transform:rotate(-2deg)}
+.heading .date{color:#6b7d60;margin-top:8px}
+.primary{background:#3e6545;color:#fffef2;border:1px solid #294b36;border-radius:18px 23px 17px 22px;font-family:var(--hand);font-size:14px;padding:11px 21px;box-shadow:2px 3px 0 #b9cba4;transform:rotate(-1deg)}
+.meal{--card-color:#e0e9cb;border-radius:24px 30px 22px 29px}
+.meal:nth-child(2){--card-color:#d1dfbd;border-radius:30px 22px 28px 24px}
+.meal:nth-child(3){--card-color:#dbe7d7;border-radius:22px 28px 25px 31px}
+.meal::before{border:1px solid #57744540;box-shadow:2px 3px 0 #5673430d}
+.meal .type{color:#4e6a3c;font-size:10px;letter-spacing:1.8px}
+.meal h3{font-size:clamp(19px,1.65vw,25px);line-height:1.4;color:#284a32}
+.meta,.muted,.nutrition span{color:#66775b}
+.actions .cook{background:#446b47;color:#fffef2;border:1px solid #365b38;border-radius:16px 20px 15px 19px}
+.actions .swap{background:#f4f7e8;color:#436240;border:1px solid #73935b55;border-radius:12px 15px 11px 16px}
+.nutrition{border-top:1px solid #91a77c;border-bottom:1px solid #91a77c}
+.nutrition strong{font-family:var(--hand);font-size:16px}.nutrition b{color:#345735}
+.weekheader h2{font-size:21px}.weekheader>div{color:#577542}
+.day{background:#e5ecd8;border:1px solid #70875d38;border-radius:16px 20px 15px 19px;color:#45613b}
+.day:nth-child(even){border-radius:20px 15px 19px 16px}
+.day span{font-family:var(--hand);font-weight:700}
+.day.selected,.day.selected:hover{background:#476b43;border:1px solid #365837;box-shadow:2px 3px 0 #b6c9a0;transform:rotate(-2deg)}
+.day:hover{background:#d8e4c9}.day img{border-color:#f3f7e9}
+.note{background:#e7edd9;border:1px solid #748c5c35;border-radius:22px 28px 20px 26px;box-shadow:2px 3px 0 #55754009}
+.note h2{font-size:21px}.note:nth-child(2){background:#dfe8ce;border-radius:27px 21px 26px 20px}
+.expiry{background:#f4f7e9;border:1px solid #9bad86;border-radius:13px 17px 12px 16px}
+.expiry strong{color:#657a3e}.budget,.budget span{color:#3d603b}.budget small{color:#6b7d5d}
+.progress{background:#c6d6b2}.progress div{background:#678b50}
+.listbutton strong{font-size:20px}.listbutton>span{color:#617c4b;font-size:12px}
+.source{color:#849173}
+.sidebar{background:#254532;border:1px solid #1d392a;border-radius:26px 22px 29px 23px}
+.sidebar-brand{background:#f4f5e5;border:1px solid #d8dfc2;border-radius:13px 18px 12px 17px;transform:rotate(-2deg)}
+.sidebar .navitem.active{background:#dbe8c6;border-radius:12px 16px 11px 15px;color:#294b31}
+.sidebar-section-label{color:#b1c49e}.sidebar-bottom{font-family:var(--hand);color:#b6c9a5;font-size:12px}
+@media(max-width:700px){.heading h1{font-size:37px}.primary{font-size:12px;padding:10px 14px}.meal h3{font-size:17px}.meal .type{font-size:9px;letter-spacing:1px}.weekheader h2{font-size:17px}.note h2,.listbutton strong{font-size:18px}.nutrition strong{font-size:15px}}
+</style><style id="bottom-summary-layout">
+.content{grid-template-columns:minmax(0,1fr);flex:0 0 auto;gap:4px}
+.content>.rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:0;padding-top:0;align-items:stretch}
+.rail .note,.rail .note:last-child{grid-column:auto;margin:0;min-width:0}
+.rail .note{padding:20px}
+.rail .note h2{margin-bottom:14px}
+.rail .listbutton{gap:12px;flex-wrap:wrap}
+.shell{height:auto;min-height:100vh}
+.main{overflow:visible}
+@media(max-width:700px){.content>.rail{grid-template-columns:minmax(0,1fr);gap:12px}.rail .note{padding:18px}.nutrition{margin-bottom:16px}}
+</style><style id="clean-logo-layout">
+.sidebar-brand{align-self:stretch;display:flex;align-items:center;justify-content:center;margin:0 8px 30px;padding:15px 10px;background:#f5f7ec;border:0;border-radius:12px;box-shadow:none;transform:none;overflow:hidden}
+.sidebar-brand::before,.sidebar-brand::after{content:none}
+.sidebar .logo{display:block;width:140px;max-width:100%;height:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;transform:none;mix-blend-mode:multiply}
+@media(max-width:700px){.sidebar-brand{align-self:flex-start;margin:0 0 16px;padding:11px 14px;border-radius:10px}.sidebar .logo{width:120px}}
+</style><style id="modern-green-theme">
+:root{--forest:#244b38;--ink:#253c30;--sage:#e4eddd;--paper:#fbfcf8;--hand:"Segoe UI",Arial,sans-serif}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#e8eee4;background-image:none;color:#253c30;-webkit-font-smoothing:antialiased}
+.main{background:#fbfcf8;background-image:none;border:1px solid #dfe7da;border-radius:26px;box-shadow:none}
+h1,h2,.meal h3,.weekheader h2,.listbutton strong,.nutrition strong,.primary,.day span{font-family:inherit;letter-spacing:-.5px}
+.heading h1{font-size:44px;font-weight:650;line-height:1.15;letter-spacing:-1.8px}
+.heading h1::after{content:none}
+.heading .date{font-size:13px;color:#7a877b;margin-top:10px}
+.primary{background:#365e43;color:#fff;border:0;border-radius:12px;box-shadow:none;transform:none;padding:13px 20px;font-size:13px;font-weight:600;letter-spacing:0}
+.meal,.meal:nth-child(2),.meal:nth-child(3){border-radius:20px}
+.meal{--card-color:#edf1e3}.meal:nth-child(2){--card-color:#e2eddd}.meal:nth-child(3){--card-color:#e6eee7}
+.meal::before{border:1px solid #3e604315;box-shadow:none}
+.meal .type{font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6c8064;margin-top:12px}
+.meal h3{font-size:clamp(20px,1.8vw,27px);font-weight:600;line-height:1.2;letter-spacing:-.7px;margin:9px 0 11px;color:#263e2d}
+.meta{font-size:12px;color:#73806e}
+.meal .actions{margin-top:20px;gap:8px}
+.actions .cook{background:#365e43;border:0;border-radius:10px;font-size:12px;font-weight:600;padding:11px 12px}
+.actions .swap{background:#ffffffb3;border:1px solid #3e604314;border-radius:10px;padding:10px}
+.nutrition{border-top:1px solid #e1e7dc;border-bottom:1px solid #e1e7dc;padding:18px 0;margin:22px 0}
+.nutrition strong{font-size:14px;font-weight:600;letter-spacing:0}.nutrition span{font-size:12px;color:#7a8675}.nutrition b{font-size:16px;color:#3b543a;font-weight:600}
+.note,.note:nth-child(2){background:#f1f4eb;border:1px solid #e0e7d8;border-radius:18px;box-shadow:none}
+.rail .note{padding:22px}.note h2,.listbutton strong{font-size:18px;font-weight:600;letter-spacing:-.4px;color:#304b34}
+.expiry{background:#fbfcf8;border:1px solid #e5eadf;border-radius:11px;padding:13px 14px;font-size:13px}
+.expiry strong{font-size:11px;font-weight:500;color:#6b8253;margin-top:4px}
+.budget{font-size:30px;letter-spacing:-1px;font-weight:650}.budget span{color:#365e43}.budget small{font-size:13px;letter-spacing:0;color:#7a8771}
+.progress{height:8px;background:#dce5d2}.progress div{background:#7d9a65}.muted{font-size:12px;color:#7a8771}
+.listbutton>span{color:#708464;font-size:12px}
+.sidebar{background:#234333;border:0;border-radius:24px;box-shadow:none}
+.sidebar .navitem{font-size:13px;font-weight:500;border-radius:10px;letter-spacing:0}
+.sidebar .navitem.active{background:#dce9d2;border-radius:10px;box-shadow:none;font-weight:600}
+.sidebar-section-label{font-size:9px;letter-spacing:1.6px;color:#91ab96}
+.sidebar-brand{background:#fbfcf8;border-radius:10px;transform:none;box-shadow:none;border:0}
+@media(max-width:700px){.heading h1{font-size:34px;letter-spacing:-1px}.primary{font-size:12px;padding:11px 14px}.meal h3{font-size:17px;letter-spacing:-.4px}.meal .type{font-size:9px;letter-spacing:.8px}.meta{font-size:11px}.actions .cook{font-size:10px;padding:9px 7px}.actions .swap{padding:8px}.meal .actions{margin-top:16px;gap:5px}.nutrition strong{font-size:13px}.rail .note{padding:18px}.main{border-radius:22px}}
+</style><style id="desktop-dashboard-polish">
+.shell{width:100%;max-width:1600px;height:100dvh;min-height:700px;grid-template-columns:200px minmax(0,1fr);padding:16px;gap:16px}
+.main{padding:24px 28px;overflow:auto;min-height:0}
+.heading{align-items:center;margin:0 0 20px;flex-shrink:0}
+.welcome-eyebrow{margin:0 0 7px;font-size:10px;font-weight:700;letter-spacing:1.6px;color:#7a8d70}
+.heading h1{font-size:32px;letter-spacing:-1px;line-height:1.2}
+.welcome-message{margin:8px 0 0;font-size:13px;color:#7a877b}
+.heading .date{margin:0;font-size:12px;white-space:nowrap}
+.content{gap:16px;flex:0 0 auto}.content>section{min-width:0}
+.meals{gap:18px}.meal{padding-bottom:16px}
+.meal img{max-width:clamp(140px,18vh,180px)}
+.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(70px,9vh,90px))}
+.meal h3{font-size:22px;margin:8px 0}.meal .type{margin-top:8px}.meal .actions{margin-top:16px}
+.nutrition{display:block;border:0;padding:0;margin:20px 0 0}
+.nutrition-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px}
+.nutrition-heading strong{font-size:14px;font-weight:600;color:#304b34}
+.nutrition-heading>span{font-size:11px;color:#8a9584}
+.nutrition-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.nutrition-stat{padding:14px 18px;border:1px solid #e0e8d8;border-radius:14px;background:#f0f4e9}
+.nutrition-stat:first-child{background:#e3edda;border-color:#d7e3cb}
+.nutrition .stat-label{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:500;color:#6a7d61}
+.stat-dot{width:7px;height:7px;border-radius:50%;background:#466b3e}.stat-dot.protein{background:#7d9c67}.stat-dot.fat{background:#abb77f}.stat-dot.carbs{background:#7b9b8c}
+.stat-value{display:flex;align-items:baseline;gap:6px;margin-top:6px}
+.nutrition .stat-value b{font-size:27px;font-weight:650;line-height:1.15;letter-spacing:-.7px;color:#2e4c32}
+.nutrition .stat-value span{font-size:12px;color:#7d8a73}
+.content>.rail{gap:16px}.rail .note{padding:18px}.rail .note h2{font-size:16px;margin-bottom:12px}
+.rail .note:first-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start}
+.rail .note:first-child h2{grid-column:1/-1;margin:0}
+.expiry{margin:0;padding:12px 10px;gap:8px;justify-content:flex-start;border-style:solid}.ingredient{width:28px;height:28px}
+.budget{margin:12px 0;font-size:27px}.note .muted{margin-bottom:0;font-size:11px}
+@media(min-width:1001px) and (max-height:760px){.main{padding:20px 24px}.heading{margin-bottom:16px}.meal img{max-width:140px}.meal::before{top:min(calc(50cqw - var(--card-padding)),70px)}.meal h3{font-size:20px}.nutrition{margin-top:16px}.nutrition-stat{padding:12px 16px}.content{gap:14px}}
+@media(max-width:1100px) and (min-width:1001px){.shell{grid-template-columns:180px minmax(0,1fr)}.rail .note:first-child{grid-template-columns:1fr}.rail .note:first-child h2{grid-column:auto}.expiry{padding:8px}.meal h3{font-size:20px}}
+@media(max-width:1000px){.shell{height:auto;min-height:100vh;grid-template-columns:180px minmax(0,1fr)}.heading{align-items:flex-start;flex-wrap:wrap;gap:12px}.content>.rail{grid-template-columns:1fr}.rail .note:first-child{grid-template-columns:repeat(2,minmax(0,1fr))}.nutrition-stat{padding:12px}.nutrition .stat-value b{font-size:23px}.main{padding:22px}}
+@media(max-width:700px){.shell{display:block;padding:10px}.main{padding:20px 16px}.heading h1{font-size:28px}.heading .date{font-size:11px}.meals{gap:10px}.meal h3{font-size:17px}.meal img{max-width:140px}.nutrition-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.nutrition-heading{align-items:flex-start;flex-direction:column;gap:3px}.nutrition-heading strong{width:auto}.content>.rail{gap:12px}}
+</style><style id="connected-dashboard-tab">
+@media(min-width:701px){
+.shell{gap:0}
+.sidebar{border-radius:24px 0 0 24px;padding-right:0}
+.sidebar-brand{margin-right:22px}
+.sidebar .nav{overflow:visible}
+.sidebar .navitem{margin-right:14px}
+.sidebar .navitem.active{margin-right:-1px;padding-right:29px;background:#fbfcf8;color:#294b31;border-radius:12px 0 0 12px;box-shadow:none;z-index:1}
+.main{border-left:0;border-radius:0 26px 26px 0}
+}
+@media(min-width:701px) and (max-width:1100px){.sidebar{padding-right:0}.sidebar-brand{margin-right:18px}.sidebar .navitem{margin-right:10px}.sidebar .navitem.active{margin-right:-1px;padding-right:23px}}
+</style><style id="expiry-card-refinement">
+.rail .note.expiry-card:first-child{display:block;background:#f3f6ee;padding:18px;border:1px solid #dfe7d7;border-radius:18px}
+.expiry-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rail .expiry-card:first-child .expiry-header h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.3px}
+.expiry-count{padding:4px 8px;background:#e5eddd;border-radius:6px;color:#6a7f5c;font-size:10px;font-weight:600;white-space:nowrap}
+.expiry-subtitle{margin:6px 0 13px;color:#839077;font-size:11px;line-height:1.4}
+.expiry-list{padding:0 12px;background:#fcfdf9;border:1px solid #e6ecdf;border-radius:12px}
+.expiry-row{display:flex;align-items:center;gap:10px;padding:9px 0;min-width:0}
+.expiry-row+.expiry-row{border-top:1px solid #edf1e7}
+.expiry-image{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:#eef3e7}
+.expiry-image .ingredient{width:26px;height:26px;object-fit:contain}
+.expiry-name{font-size:12px;font-weight:600;color:#3a5234}
+.expiry-badge{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;white-space:nowrap;color:#718060;background:#edf3e5;padding:5px 7px;border-radius:6px}
+.expiry-badge.urgent{color:#957032;background:#fbf0d9}
+.expiry-badge.urgent>span{width:4px;height:4px;border-radius:50%;background:#b38a44}
+@media(min-width:1001px) and (max-width:1200px){.rail .note.expiry-card:first-child{padding:15px}.expiry-list{padding:0 9px}.expiry-row{gap:7px}.expiry-badge{font-size:9px;padding:5px}.expiry-image{width:28px;height:28px;flex-basis:28px}}
+</style><style id="fitness-and-shopping">
+.nutrition.fitness-nutrition{display:grid;grid-template-columns:minmax(130px,.85fr) 146px minmax(300px,2fr);align-items:center;gap:24px;background:#1e3026;border:1px solid #294333;border-radius:20px;padding:18px 24px;margin:18px 0 0;color:#f4f8ef}
+.fitness-intro{display:flex;flex-direction:column;gap:6px}.fitness-intro strong{font-size:16px;color:#f4f8ef;font-weight:650}.nutrition .fitness-intro>span{font-size:11px;color:#a0b29f}.fitness-intro p{font-size:11px;color:#80967f;margin:12px 0 0}
+.fitness-rings{position:relative;width:146px;height:146px}.fitness-rings svg{width:100%;height:100%;display:block}.ring-total{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.nutrition .ring-total b{font-size:24px;font-weight:700;letter-spacing:-.8px;color:#fff}.nutrition .ring-total span{font-size:10px;color:#aebda9}
+.fitness-macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.nutrition .macro-label{color:var(--macro);font-size:12px;font-weight:600}.fitness-macro>div{display:flex;align-items:baseline;gap:4px;margin-top:5px}.nutrition .fitness-macro b{color:var(--macro);font-size:32px;font-weight:650;letter-spacing:-1px;line-height:1.15}.nutrition .fitness-macro>div>span{color:var(--macro);font-size:14px}.fitness-macro small{display:block;margin-top:6px;color:#9eaf99;font-size:10px}.macro-caption{grid-column:1/-1;color:#82977f;font-size:10px;margin:2px 0 0}
+.shopping-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.rail .shopping-header h2{margin:0}.shopping-count{font-size:10px;color:#6e825f;background:#e5eddd;border-radius:6px;padding:4px 8px}.shopping-items{display:grid;margin-top:10px}.shopping-items label{display:flex;align-items:center;gap:9px;padding:6px 0;color:#4a6040;font-size:12px;cursor:pointer}.shopping-items label+label{border-top:1px solid #e3eadb}.shopping-items input{appearance:none;width:14px;height:14px;margin:0;border:1.5px solid #a5b599;border-radius:4px;background:#fcfdf8;cursor:pointer;display:grid;place-content:center;flex-shrink:0}.shopping-items input:checked{background:#426b43;border-color:#426b43}.shopping-items input:checked::after{content:"";width:6px;height:3px;border-left:1.5px solid white;border-bottom:1.5px solid white;transform:rotate(-45deg) translateY(-1px)}.shopping-items input:checked+span{text-decoration:line-through;color:#8a9880}
+@media(min-width:1001px) and (max-height:800px){.nutrition.fitness-nutrition{padding:13px 20px;gap:20px;grid-template-columns:minmax(120px,.85fr) 120px minmax(280px,2fr)}.fitness-rings{width:120px;height:120px}.nutrition .ring-total b{font-size:21px}.nutrition .fitness-macro b{font-size:29px}}
+@media(max-width:1100px){.nutrition.fitness-nutrition{grid-template-columns:120px minmax(0,1fr);gap:16px;padding:18px}.fitness-intro{grid-column:1/-1;flex-direction:row;align-items:baseline;justify-content:space-between}.fitness-intro p{display:none}.fitness-rings{width:120px;height:120px}.fitness-macros{gap:10px}.nutrition .fitness-macro b{font-size:25px}}
+@media(max-width:700px){.nutrition.fitness-nutrition{grid-template-columns:100px minmax(0,1fr);gap:14px;padding:16px}.fitness-rings{width:100px;height:100px}.nutrition .ring-total b{font-size:18px}.fitness-macros{gap:8px}.nutrition .fitness-macro b{font-size:21px}.nutrition .macro-label{font-size:10px}.fitness-macro small{font-size:8px}.macro-caption{font-size:9px}.fitness-intro strong{width:auto}}
+</style><style id="fresh-color-palette">
+:root{--forest:#124c3a;--ink:#143e32;--sage:#dcf7e9;--paper:#fcfffd}
+body{background:#e5f5ee;color:#143e32}
+.main{background:#fcfffd;border-color:#d4eee1}
+.sidebar{background:#124c3a}
+.sidebar-brand{background:#fcfffd}
+.sidebar-section-label{color:#9dd8bb}
+.sidebar .navitem{color:#bce4cf}
+.sidebar .navitem:hover{background:#ffffff14;color:#fff}
+.sidebar .navitem.active{background:#fcfffd;color:#124c3a}
+.welcome-eyebrow{color:#15956b}
+.heading h1{color:#124c3a}
+.heading .date{color:#65897b}
+.meal{--card-color:#fff0d6}
+.meal:nth-child(2){--card-color:#ddf6d2}
+.meal:nth-child(3){--card-color:#daf4ef}
+.meal::before{border-color:#205b3510}
+.meal h3{color:#173f32}
+.meal .type{color:#8e642e}
+.meal:nth-child(2) .type{color:#467526}
+.meal:nth-child(3) .type{color:#16816e}
+.meta{color:#61816d}
+.actions .cook{background:#17845c;color:#fff}
+.actions .swap{background:#ffffffb8;color:#17845c;border-color:#ffffff80}
+.nutrition.fitness-nutrition{background:#103e32;border-color:#103e32;box-shadow:0 5px 18px #0b734e0b}
+.nutrition .fitness-intro>span{color:#afd4c4}
+.fitness-intro p,.macro-caption{color:#83b29e}
+.nutrition .ring-total span{color:#b5dbc9}
+.fitness-macro small{color:#a3c9b6}
+.note,.note:nth-child(2){background:#effaf4;border-color:#d9eee2}
+.rail .note.expiry-card:first-child{background:#fff6e6;border-color:#f4e7c9}
+.expiry-header h2,.note h2,.listbutton strong{color:#194c38}
+.expiry-count{background:#f8e7be;color:#8a6b2c}
+.expiry-subtitle{color:#94805c}
+.expiry-list{background:#fffdf7;border-color:#f3e9d3}
+.expiry-row+.expiry-row{border-color:#f3ecdc}
+.expiry-image{background:#edf5df}
+.expiry-name{color:#385b39}
+.expiry-badge{background:#e7f5df;color:#59813b}
+.expiry-badge.urgent{background:#ffe2c8;color:#ad5e25}
+.expiry-badge.urgent>span{background:#e7863c}
+.rail .note:nth-child(2){background:#edfadf;border-color:#ddedcb}
+.budget span{color:#31834a}.budget small,.note .muted{color:#759262}
+.progress{background:#d6ebc0}.progress div{background:#8bcf40}
+.rail .shopping-card{background:#eaf8f5;border-color:#d3ece4}
+.shopping-count{background:#d5eee4;color:#3d8568}
+.shopping-items label{color:#386552}
+.shopping-items label+label{border-color:#d7ece2}
+.shopping-items input{background:#fcfffd;border-color:#9bcbb4}
+.shopping-items input:checked{background:#17845c;border-color:#17845c}
+.shopping-items input:checked+span{color:#83a795}
+@media(max-width:700px){.sidebar .navitem.active{background:#c9f491;color:#164d34}}
+</style><style id="larger-meal-plates">
+.meal img{max-width:clamp(180px,24vh,240px)}
+.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(90px,12vh,120px))}
+@media(max-width:700px){.meal img{max-width:180px}.meal::before{top:min(calc(50cqw - var(--card-padding)),90px)}}
+</style><style id="fit-dashboard-to-screen">
+@media(min-width:1001px){
+.shell{height:100dvh;min-height:0;padding:12px;max-width:none;grid-template-columns:190px minmax(0,1fr)}
+.main{padding:18px 24px;min-height:0;overflow:auto}
+.heading{margin-bottom:10px}.heading h1{font-size:30px}.welcome-eyebrow{margin-bottom:5px}
+.content{gap:12px}
+.meal img{max-width:clamp(150px,23vh,230px)}
+.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(75px,11.5vh,115px))}
+.meal{padding-bottom:12px}.meal .type{margin-top:5px}.meal h3{font-size:21px;margin:6px 0}.meal .actions{margin-top:12px}
+.actions .cook{padding:9px 12px}.actions .swap{padding:8px}
+.nutrition.fitness-nutrition{grid-template-columns:minmax(120px,.85fr) 110px minmax(280px,2fr);gap:18px;padding:12px 20px;margin-top:12px}
+.fitness-rings{width:110px;height:110px}.fitness-intro{grid-column:auto;flex-direction:column;align-items:flex-start;justify-content:flex-start}.nutrition .ring-total b{font-size:20px}
+.fitness-macros{gap:10px}.nutrition .fitness-macro b{font-size:27px}
+.content>.rail{gap:12px}.rail .note,.rail .note.expiry-card:first-child{padding:14px 16px}
+.expiry-subtitle{margin:5px 0 9px}.expiry-row{padding:7px 0}.expiry-image{width:30px;height:30px;flex-basis:30px}
+.shopping-items{margin-top:7px}.shopping-items label{padding:5px 0;font-size:11px}
+.rail .note h2{font-size:16px}.budget{margin:10px 0}
+}
+@media(min-width:1001px) and (max-height:720px){
+.shell{padding:8px}.main{padding:14px 20px}.heading h1{font-size:27px}.heading{margin-bottom:7px}.welcome-eyebrow{font-size:9px}
+.meal img{max-width:clamp(130px,22vh,158px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(65px,11vh,79px))}
+.meal h3{font-size:19px}.meal .actions{margin-top:9px}.meal{padding-bottom:10px}
+.nutrition.fitness-nutrition{grid-template-columns:minmax(120px,.85fr) 90px minmax(280px,2fr);padding:10px 18px;margin-top:10px}.fitness-rings{width:90px;height:90px}.nutrition .ring-total b{font-size:17px}.nutrition .fitness-macro b{font-size:24px}
+.content{gap:10px}.rail .note,.rail .note.expiry-card:first-child{padding:12px 14px}.shopping-items label{padding:4px 0}.expiry-subtitle{margin-bottom:6px}.expiry-row{padding:5px 0}
+}
+</style><style id="basil-kitchen-palette">
+:root{--forest:#244c3b;--ink:#253f30;--sage:#e5edce;--paper:#fffdf7}
+body{background:#edf0e3;color:#253f30}
+.main{background:#fffdf7;border-color:#e4e8d8}
+.sidebar{background:#244c3b}
+.sidebar-brand{background:#fffdf7}
+.sidebar .navitem{color:#c4d8c5}
+.sidebar .navitem:hover{background:#ffffff12;color:#fffdf7}
+.sidebar .navitem.active{background:#fffdf7;color:#244c3b}
+.heading h1{color:#253f30}.welcome-eyebrow{color:#bc6246}.heading .date{color:#7b8874}
+.meal{--card-color:#fae9d5}.meal:nth-child(2){--card-color:#e5edce}.meal:nth-child(3){--card-color:#e1ece1}
+.meal::before{border-color:#50664012}.meal h3{color:#293f2f}
+.meal .type{color:#ab6446}.meal:nth-child(2) .type{color:#67813d}.meal:nth-child(3) .type{color:#4e7c60}
+.meta{color:#7b856b}.actions .cook{background:#416b43;color:#fffdf7}.actions .swap{background:#fffdf7b8;color:#416b43;border-color:#ffffff70}
+.nutrition.fitness-nutrition{background:#263f30;border-color:#263f30;box-shadow:none}
+.nutrition .fitness-intro>span{color:#c0cdb2}.fitness-intro p,.macro-caption{color:#96aa8c}.nutrition .ring-total span{color:#c4d1b7}.fitness-macro small{color:#adbea1}
+.note,.note:nth-child(2){background:#f2f5e7;border-color:#e4e9d6}
+.rail .note.expiry-card:first-child{background:#faf0e2;border-color:#eee2cf}
+.expiry-header h2,.note h2,.listbutton strong{color:#354c33}
+.expiry-count{background:#efdfc6;color:#98704a}.expiry-subtitle{color:#9b8668}
+.expiry-list{background:#fffdf7;border-color:#efe6d7}.expiry-row+.expiry-row{border-color:#f0e9dc}
+.expiry-image{background:#eaf0db}.expiry-name{color:#455b37}
+.expiry-badge{background:#eaf0db;color:#6d824c}.expiry-badge.urgent{background:#fbe0d2;color:#b46143}.expiry-badge.urgent>span{background:#d57955}
+.rail .note:nth-child(2){background:#eff3dd;border-color:#e1e8c9}
+.budget span{color:#567539}.budget small,.note .muted{color:#829069}
+.progress{background:#dce6c1}.progress div{background:#95b85d}
+.rail .shopping-card{background:#edf3e9;border-color:#dde7d5}
+.shopping-count{background:#dce7d3;color:#678254}.shopping-items label{color:#4d6542}.shopping-items label+label{border-color:#dfe8d7}
+.shopping-items input{background:#fffdf7;border-color:#b2c2a0}.shopping-items input:checked{background:#416b43;border-color:#416b43}.shopping-items input:checked+span{color:#92a183}
+@media(max-width:700px){.sidebar .navitem.active{background:#e5edce;color:#244c3b}}
+</style><style id="unified-green-palette">
+:root{--green-900:#244c3b;--green-700:#416b50;--green-500:#7fa080;--green-300:#b8cfaa;--green-100:#eaf0e3;--green-50:#f2f5ed;--canvas:#fffdf7}
+body{background:#e9eee3;color:var(--green-900)}
+.main,.sidebar-brand{background:var(--canvas)}
+.sidebar{background:var(--green-900)}
+.sidebar .navitem.active{background:var(--canvas);color:var(--green-900)}
+.heading h1,.meal h3,.note h2,.expiry-name{color:var(--green-900)}
+.welcome-eyebrow,.meal .type,.meal:nth-child(2) .type,.meal:nth-child(3) .type{color:var(--green-700)}
+.meal,.meal:nth-child(2),.meal:nth-child(3){--card-color:var(--green-100)}
+.meal::before{border-color:#dce6d4}
+.actions .cook,.shopping-items input:checked{background:var(--green-700);border-color:var(--green-700)}
+.actions .swap{background:var(--canvas);color:var(--green-700)}
+.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card{background:var(--green-50);border-color:#dde6d5}
+.expiry-count,.shopping-count{background:#e1ead7;color:var(--green-700)}
+.expiry-subtitle,.note .muted,.budget small{color:#7b8b70}
+.expiry-list{background:var(--canvas);border-color:#e1e8d9}
+.expiry-row+.expiry-row,.shopping-items label+label{border-color:#e4eadc}
+.expiry-image{background:var(--green-100)}
+.expiry-badge{background:var(--green-100);color:var(--green-700)}
+.expiry-badge.urgent{background:#dce8cf;color:#3f613d}
+.expiry-badge.urgent>span{background:var(--green-700)}
+.budget span,.shopping-items label{color:var(--green-700)}
+.progress{background:#dce6d2}.progress div{background:var(--green-500)}
+.nutrition.fitness-nutrition{background:var(--green-900);border-color:var(--green-900)}
+@media(max-width:700px){.sidebar .navitem.active{background:var(--green-100);color:var(--green-900)}}
+</style><style id="clear-dashboard-hierarchy">
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
+.section-heading h2{margin:0;font-size:15px;font-weight:650;letter-spacing:-.2px;color:#244c3b}.section-heading>span{font-size:11px;color:#809076}
+.content>.rail{grid-template-columns:1fr 1.15fr .85fr;gap:12px;align-items:stretch}.rail>.kitchen-heading{grid-column:1/-1;margin:2px 0 0}
+.rail .note.expiry-card{display:block}
+.fitness-intro h2{font-family:inherit;font-size:16px;letter-spacing:-.3px;font-weight:650;color:#f4f8ef;margin:0}
+.rail .shopping-card{display:flex;flex-direction:column}.shopping-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px;margin-top:13px}.shopping-items label{min-height:35px;padding:7px 0;border-bottom:1px solid #e4eadc}.shopping-items label+label{border-top:0}
+.rail .budget-card{display:flex;flex-direction:column;justify-content:flex-start}.budget-card .budget{margin:15px 0 13px}.budget-card .muted{line-height:1.5;margin-top:12px}
+.rail .note,.rail .note.expiry-card{background:var(--green-50);border:1px solid #dde6d5;border-radius:16px}
+@media(min-width:1001px){.heading{padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid #e6ebdf}.content{gap:14px}.nutrition.fitness-nutrition{margin-top:16px}}
+@media(min-width:1001px) and (max-height:800px){.main{padding:16px 22px}.heading{padding-bottom:10px;margin-bottom:10px}.section-heading{margin-bottom:6px}.content{gap:10px}.content>.rail{gap:8px 12px}.meal img{max-width:clamp(135px,20vh,160px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(67.5px,10vh,80px))}.meal h3{font-size:20px}.nutrition.fitness-nutrition{margin-top:12px;padding:10px 18px;grid-template-columns:minmax(120px,.85fr) 100px minmax(280px,2fr)}.fitness-rings{width:100px;height:100px}.rail .note,.rail .note.expiry-card{padding:12px 14px}.shopping-items{margin-top:9px}.shopping-items label{min-height:29px;padding:5px 0}.expiry-subtitle{margin-bottom:7px}.expiry-row{padding:6px 0}}
+@media(max-width:1000px){.content>.rail{grid-template-columns:1fr 1fr}.rail .budget-card{grid-column:1/-1}.section-heading>span{font-size:10px}.shopping-items{grid-template-columns:1fr}.fitness-intro h2{font-size:15px}}
+@media(max-width:700px){.content>.rail{grid-template-columns:1fr}.rail .budget-card{grid-column:auto}.section-heading{margin-bottom:10px}.section-heading h2{font-size:14px}.kitchen-heading>span{display:none}.shopping-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><style id="header-profile-icon">
+.header-account{display:flex;align-items:center;gap:18px;margin-left:auto}
+.profile-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:#eaf0e3;border:1px solid #dce6d4;color:#416b50}
+.profile-icon svg{width:21px;height:21px}
+@media(max-width:700px){.heading{flex-wrap:nowrap}.header-account{gap:10px}.header-account .date{display:none}.profile-icon{width:36px;height:36px;flex-basis:36px}}
+</style><style id="balanced-dashboard-layout">
+.sidebar-brand{background:transparent;border:0;box-shadow:none;border-radius:0;padding:6px 4px;margin:2px 16px 28px 10px;overflow:visible;justify-content:flex-start}
+.sidebar .logo{width:145px;filter:grayscale(1) invert(1);mix-blend-mode:screen;background:transparent}
+@media(min-width:1001px){
+.shell{grid-template-columns:185px minmax(0,1fr);height:100dvh;min-height:0;padding:12px}
+.main{padding:20px 26px;display:flex;flex-direction:column}
+.heading{flex:0 0 auto;margin-bottom:14px;padding-bottom:12px}
+.content{flex:1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(min-content,1fr) auto;gap:16px;min-height:0}
+.content>.today-section{display:grid;grid-template-rows:auto minmax(min-content,1fr) auto;min-height:0}
+.section-heading{margin-bottom:8px}
+.meals{align-items:stretch;gap:18px;min-height:0}
+.meal{height:100%;padding-bottom:14px}
+.meal img{max-width:clamp(165px,24vh,260px)}
+.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(82.5px,12vh,130px))}
+.meal .actions{margin-top:auto;padding-top:12px}
+.nutrition.fitness-nutrition{margin-top:16px;padding:12px 22px;grid-template-columns:minmax(140px,.9fr) 108px minmax(300px,2fr)}
+.fitness-rings{width:108px;height:108px}
+.content>.rail{grid-template-columns:1fr 1.2fr .8fr;gap:10px 16px;align-items:stretch}
+.rail>.kitchen-heading{margin:0}
+.rail .note,.rail .note.expiry-card{padding:14px 16px}
+.shopping-items{margin-top:8px}.shopping-items label{min-height:31px}
+.budget-card .budget{margin:12px 0}.budget-card .muted{margin-top:10px}
+}
+@media(min-width:1001px) and (max-height:800px){
+.shell{padding:10px}.main{padding:16px 22px}.heading{margin-bottom:10px;padding-bottom:10px}
+.content{gap:12px}.meal img{max-width:clamp(145px,22vh,176px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(72.5px,11vh,88px))}
+.meal{padding-bottom:10px}.meal .actions{padding-top:9px}.meal h3{font-size:20px;margin:5px 0}
+.nutrition.fitness-nutrition{margin-top:12px;padding:10px 18px;grid-template-columns:minmax(130px,.9fr) 90px minmax(280px,2fr)}.fitness-rings{width:90px;height:90px}
+.rail .note,.rail .note.expiry-card{padding:12px 14px}.shopping-items label{min-height:28px}.expiry-row{padding:5px 0}
+}
+@media(max-width:700px){.sidebar-brand{margin:0 0 16px;padding:0 4px}.sidebar .logo{width:120px}}
+</style><style id="nutrition-layout-fix">
+.nutrition-summary{display:block;margin-top:18px;padding:0;background:transparent;border:0;border-radius:0}
+.nutrition-summary-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.nutrition-summary-title h2{margin:0;font-size:15px;font-weight:650}
+.nutrition-summary-title>span{font-size:11px;color:#6c7d62}
+.nutrition-summary-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.nutrition-summary-values>div{padding:13px 18px;border:1px solid #dfe7d7;background:#f0f4e9;border-radius:12px}
+.nutrition-summary-values>div:first-child{padding:13px 18px;border:1px solid #244c3b;background:#244c3b}
+.nutrition-summary-values dt{font-size:12px;font-weight:600;color:#536b49;margin-bottom:7px}
+.nutrition-summary-values dd{gap:6px;line-height:1}
+.nutrition-summary-values strong{font-size:27px;color:#244c3b;font-weight:650;letter-spacing:-.7px}
+.nutrition-summary-values dd>span{font-size:12px;color:#607653}
+.nutrition-summary-values>div:first-child dt{color:#d6e5ca}
+.nutrition-summary-values>div:first-child strong{color:#fffdf7}
+.nutrition-summary-values>div:first-child dd>span{color:#d6e5ca}
+@media(min-width:1001px){.content{flex:0 0 auto;grid-template-rows:auto auto;gap:18px}.content>.today-section{grid-template-rows:auto auto auto}.meal .actions{margin-top:12px;padding-top:0}.meals{align-items:stretch}.meal{height:auto}.meal img{max-width:clamp(165px,24vh,240px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(82.5px,12vh,120px))}}
+@media(min-width:1001px) and (max-height:800px){.nutrition-summary{margin-top:14px}.nutrition-summary-title{margin-bottom:8px}.nutrition-summary-values>div,.nutrition-summary-values>div:first-child{padding:10px 16px}.nutrition-summary-values strong{font-size:25px}.content{gap:14px}.meal img{max-width:clamp(145px,22vh,176px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(72.5px,11vh,88px))}}
+@media(max-width:700px){.nutrition-summary-values{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.nutrition-summary-values>div,.nutrition-summary-values>div:first-child{padding:12px 14px}.nutrition-summary-values strong{font-size:25px}}
+</style><style>.nutrition-summary-values{margin:0}.nutrition-summary-values dd{display:flex;align-items:baseline;margin:0;white-space:nowrap}.nutrition-summary-values strong{line-height:1.15}</style><style>.sidebar .colored-logo{filter:none;mix-blend-mode:normal;background:transparent;height:auto}</style><style id="activity-nutrition-layout">
+.activity-nutrition{margin-top:18px;min-width:0}
+.activity-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:9px}
+.activity-heading h2{margin:0;font-size:15px;font-weight:650;letter-spacing:-.2px;color:#244c3b}.activity-heading>span{font-size:11px;color:#64765b}
+.activity-panel{display:grid;grid-template-columns:1.25fr repeat(3,1fr);align-items:center;gap:18px;padding:20px 24px;border-radius:18px;background:#203e30;color:#fffdf7}
+.activity-energy{padding-right:16px;border-right:1px solid #ffffff26}.activity-energy>span:first-child{color:#cadbbf;font-size:12px;font-weight:500}.activity-energy>div{display:flex;align-items:baseline;gap:7px;margin:4px 0}.activity-energy strong{font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1.1}.activity-energy>div>span{font-size:13px;color:#cadbbf}.energy-caption{font-size:10px;color:#b3c8aa;line-height:1.4;display:block}
+.activity-macro{display:flex;align-items:center;gap:12px;min-width:0}.activity-macro svg{width:80px;height:80px;flex:0 0 80px;overflow:visible}.ring-track,.ring-fill{fill:none;stroke-width:8}.ring-track{stroke:var(--ring);opacity:.13}.ring-fill{stroke:var(--ring);stroke-linecap:round;transform:rotate(-90deg);transform-origin:44px 44px}.activity-macro text{fill:var(--ring);text-anchor:middle;font-family:inherit;font-weight:700;font-size:15px}.activity-macro h3{font-size:12px;font-weight:600;letter-spacing:0;color:#d8e5d0;margin:0 0 4px}.activity-macro p{display:flex;align-items:baseline;gap:4px;margin:0;color:var(--ring)}.activity-macro strong{font-size:29px;font-weight:650;letter-spacing:-.7px;line-height:1.1}.activity-macro p>span{font-size:13px}
+@media(min-width:1001px){.content{gap:18px;grid-template-rows:auto auto;flex:0 0 auto}.content>.today-section{grid-template-rows:auto auto auto}.content>.rail{grid-template-columns:1fr 1.15fr .85fr;gap:9px 16px}.meal img{max-width:clamp(165px,23vh,230px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(82.5px,11.5vh,115px))}.meal .actions{margin-top:12px;padding-top:0}.main{padding:20px 24px}}
+@media(min-width:1001px) and (max-height:800px){.main{padding:16px 22px}.content{gap:13px}.activity-nutrition{margin-top:13px}.activity-panel{padding:14px 20px}.activity-macro svg{width:70px;height:70px;flex-basis:70px}.meal img{max-width:clamp(145px,21vh,168px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(72.5px,10.5vh,84px))}}
+@media(max-width:1200px){.activity-panel{gap:12px;padding:16px}.activity-macro{gap:8px}.activity-macro svg{width:64px;height:64px;flex-basis:64px}.activity-macro strong{font-size:25px}.activity-energy strong{font-size:30px}.energy-caption{max-width:150px}}
+@media(max-width:1000px){.activity-panel{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.activity-energy{grid-column:1/-1;display:flex;align-items:center;gap:14px;border-right:0;border-bottom:1px solid #ffffff26;padding:0 0 12px}.activity-energy>div{margin:0}.energy-caption{margin-left:auto}.activity-macro{flex-direction:column;gap:7px;text-align:center}.activity-macro p{justify-content:center}}
+@media(max-width:700px){.activity-heading{align-items:flex-start;flex-direction:column;gap:3px}.activity-energy{flex-wrap:wrap;gap:8px 14px}.energy-caption{display:none}.activity-macro svg{width:70px;height:70px;flex-basis:70px}.activity-panel{padding:16px;gap:16px 10px}.activity-heading>span{font-size:11px}}
+</style><style id="light-balanced-palette">
+body{background:#f0efeb;color:#343e39}
+.main{background:#fffefa;border-color:#e8e7e1}
+.sidebar{background:#40594d}
+.sidebar-brand{background:transparent}
+.sidebar .navitem{color:#e0e7df}.sidebar .navitem.active{background:#fffefa;color:#354e40}
+.heading h1{color:#303f35}.heading{border-bottom-color:#eceae4}
+.meal{--card-color:#f6eee2}.meal:nth-child(2){--card-color:#edf0e7}.meal:nth-child(3){--card-color:#eef0f3}
+.meal::before{border-color:#e8e5dd}
+.meal h3{color:#374238}.meal .type,.meal:nth-child(2) .type,.meal:nth-child(3) .type{color:#74796a}
+.meta{color:#7b7f74}.actions .cook{background:#52735d}.actions .swap{background:#fffefa;color:#52735d;border-color:#e5e7de}
+.activity-panel{background:#f7f6f2;color:#344139;border:1px solid #e7e5de;box-shadow:none}
+.activity-energy{border-right-color:#dddcd4}.activity-energy>span:first-child{color:#626b60}.activity-energy strong{color:#344139}.activity-energy>div>span{color:#72796d}.energy-caption{color:#7b8175}
+.activity-macro h3{color:#596255}.ring-track{opacity:.13}
+.activity-heading h2,.section-heading h2,.note h2,.expiry-header h2,.fitness-intro h2{color:#3b463b}
+.activity-heading>span,.section-heading>span{color:#7d8377}
+.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card,.rail .budget-card{background:#faf9f5;border-color:#e7e5dd}
+.expiry-list{background:#fffefa;border-color:#ebe8e0}.expiry-image{background:#f0f1e9}.expiry-row+.expiry-row,.shopping-items label+label,.shopping-items label{border-color:#eae8df}
+.expiry-count,.shopping-count{background:#eeede6;color:#74796b}
+.expiry-subtitle,.note .muted,.budget small{color:#838577}
+.expiry-name,.shopping-items label{color:#525e4d}
+.expiry-badge{background:#eceee3;color:#6b7955}.expiry-badge.urgent{background:#faead5;color:#986729}.expiry-badge.urgent>span{background:#b57e36}
+.budget span{color:#52735d}.progress{background:#e6e8dc}.progress div{background:#91a77b}
+.shopping-items input{background:#fffefa;border-color:#bdc5b2}.shopping-items input:checked{background:#52735d;border-color:#52735d}
+.profile-icon{background:#f0f2e9;border-color:#e1e6d8;color:#52735d}
+@media(max-width:1000px){.activity-energy{border-bottom-color:#dddcd4}}
+@media(max-width:700px){.sidebar .navitem.active{background:#fffefa;color:#354e40}}
+</style><style id="meaningful-nutrition-breakdown">
+.macro-breakdown{margin-top:16px;padding:16px 20px;background:#f7f6f2;border:1px solid #e7e5de;border-radius:16px}
+.macro-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:13px}
+.macro-top h2{font-family:inherit;margin:0;font-size:15px;font-weight:650;letter-spacing:-.2px;color:#3b463b}
+.macro-top p{margin:4px 0 0;font-size:11px;color:#757d70}
+.macro-energy{display:flex;align-items:baseline;gap:7px}.macro-energy strong{font-size:26px;letter-spacing:-.6px;font-weight:650;color:#344139}.macro-energy>span{font-size:12px;color:#6a7563}
+.macro-bar{display:flex;gap:3px;height:12px;border-radius:5px;overflow:hidden}
+.bar-protein{background:#b98144}.bar-carbs{background:#6e97ba}.bar-fat{background:#a48ab3}
+.macro-key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:12px 0 0}
+.macro-key>div{display:flex;align-items:center;justify-content:space-between;gap:10px}.macro-key>div+div{border-left:1px solid #e0dfd7;padding-left:18px}
+.macro-key dt{display:flex;align-items:center;gap:7px;font-size:12px;color:#57614f}.macro-key i{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.macro-key dd{display:flex;align-items:baseline;gap:8px;margin:0}.macro-key strong{font-size:16px;color:#344139;font-weight:650;white-space:nowrap}.macro-key dd>span{font-size:11px;color:#717b68;white-space:nowrap}
+@media(max-width:1200px){.macro-key dd{flex-direction:column;gap:2px}}
+@media(min-width:1001px) and (max-height:800px){.macro-breakdown{padding:12px 18px;margin-top:12px}.macro-top{margin-bottom:10px}.macro-key{margin-top:10px}}
+@media(max-width:700px){.macro-breakdown{padding:14px}.macro-key{gap:10px}.macro-key>div{flex-direction:column;align-items:flex-start;gap:6px}.macro-key>div+div{padding-left:10px}.macro-key dd>span{font-size:10px}.macro-energy strong{font-size:23px}}
+</style><style id="meal-details-and-week-plan">
+.meal-ingredients{font-size:11px;line-height:1.7;color:#65705d;margin:9px 0 3px}.recipe-link{align-self:flex-start;display:flex;align-items:center;gap:8px;background:transparent;padding:4px 0;color:#416b50;font-size:12px;font-weight:600;cursor:pointer}.recipe-link:hover{text-decoration:underline;text-underline-offset:3px}.meal .actions{margin-top:8px}
+.meal-dialog{padding:26px;background:#fffefa;color:#344139;border:1px solid #e1e6d8;border-radius:20px;width:min(520px,calc(100vw - 32px));max-width:520px;max-height:85dvh;overflow:auto}.meal-dialog::backdrop{background:#20392c66;backdrop-filter:blur(3px)}.dialog-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.dialog-heading h2{font:650 22px/1.3 'Segoe UI',Arial,sans-serif;letter-spacing:-.5px;margin:0}.dialog-heading button{cursor:pointer;padding:0;width:30px;height:30px;border-radius:50%;background:#eef2e8;font-size:22px;flex-shrink:0}.dialog-caption{font-size:12px;color:#7a8470;margin:9px 0 20px}.meal-dialog h3{font-size:14px;margin:20px 0 10px}.meal-dialog ul,.meal-dialog ol{padding-left:20px;font-size:14px;line-height:1.6}.meal-dialog li+li{margin-top:8px}.week-dialog{width:min(840px,calc(100vw - 32px));max-width:840px}.week-table-wrap{overflow-x:auto}.week-table{border-collapse:collapse;width:100%;font-size:12px;text-align:left}.week-table th,.week-table td{padding:13px 12px;border-bottom:1px solid #e5e9df;line-height:1.4}.week-table thead{color:#718263}.week-table .current-day{background:#edf3e6}.week-table tbody th{white-space:nowrap}
+@media(min-width:1001px) and (max-height:800px){.meal img{max-width:clamp(130px,18vh,150px)}.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(65px,9vh,75px))}.meal-ingredients{margin-top:6px}.meal .actions{margin-top:6px}}
+@media(max-width:700px){.meal-ingredients{font-size:10px;line-height:1.5}.recipe-link{font-size:10px}.meal-dialog{padding:20px}}
+</style><style id="cherry-pop-palette">
+:root{--forest:#252525;--ink:#252525;--canvas:#FAFAF8;--paper:#FAFAF8;--green-900:#252525;--green-700:#4B3B3D;--green-100:#F8ECE9;--green-50:#f7f9f4}
+body{background:#F1EFED;color:#252525}.main{background:#fff;border-color:#e7ebe3}
+.sidebar{background:#252525}.sidebar-brand{background:transparent}.sidebar .navitem{color:#c3ccc0}.sidebar .navitem:hover{background:#FAFAF812;color:#fff}.sidebar .navitem.active{background:#fff;color:#252525}.sidebar .navitem.active svg{color:#D23E4B}
+.heading h1,.section-heading h2,.meal h3,.note h2,.expiry-header h2,.macro-top h2{color:#252525}.heading{border-bottom-color:#edf0e9}
+.profile-icon{background:#E74855;color:#FFFFFF;border-color:#E74855}
+.meal,.meal:nth-child(2),.meal:nth-child(3){--card-color:#F6F2F0}.meal::before{border-color:#EAE3DF}
+.meal .type,.meal:nth-child(2) .type,.meal:nth-child(3) .type{color:#8B6668}.meta,.meal-ingredients{color:#7D7272}
+.actions .cook{background:#E74855;color:#FFFFFF;border-color:#E74855;font-weight:650}.actions .swap{background:#fff;color:#594A4B;border-color:#e1e7d9}.recipe-link{color:#C83948}
+.macro-breakdown{background:#fff;border-color:#e3e9db}.macro-energy strong,.macro-key strong{color:#252525}.macro-top p,.macro-key dt,.macro-key dd>span,.macro-energy>span{color:#7D7272}.macro-key>div+div{border-color:#e4e9dc}
+.bar-protein{background:#E74855}.bar-carbs{background:#747987}.bar-fat{background:#E4B2A7}
+.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card,.rail .budget-card{background:#FCFAF8;border-color:#e5eadd}
+.expiry-count,.shopping-count{background:#FBE9E9;color:#A84650}.expiry-list{background:#fff;border-color:#e6ebdf}.expiry-image{background:#F8ECE9}.expiry-subtitle,.note .muted,.budget small{color:#8B7E7D}.expiry-name,.shopping-items label{color:#554647}
+.expiry-badge{background:#F3EDE9;color:#806765}.expiry-badge.urgent{background:#FFE3DA;color:#A44F35}.expiry-badge.urgent>span{background:#D77552}
+.budget span{color:#252525}.progress{background:#EFE3E1}.progress div{background:#E74855}
+.shopping-items input{background:#fff;border-color:#CDB9B8}.shopping-items input:checked{background:#D23E4B;border-color:#D23E4B}
+.meal-dialog{background:#fff;color:#252525;border-color:#e3e9db}.dialog-heading button{background:#F8E8E9}.week-table .current-day{background:#FFF0F0}.week-table th,.week-table td{border-color:#e7ecdf}
+@media(max-width:700px){.sidebar .navitem.active{background:#E74855;color:#252525}}
+</style><style>.main{background:#FAFAF8}.sidebar .navitem.active{background:#FAFAF8;color:#252525}.macro-breakdown,.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card,.rail .budget-card{border-color:#E9E3DF}.meal,.meal:nth-child(2),.meal:nth-child(3){--card-color:#F6F2F0}.progress div{background:#E74855}@media(max-width:700px){.sidebar .navitem.active{background:#E74855;color:white}}</style><style id="blue-citrus-palette">
+:root{--forest:#2447c2;--ink:#222d49;--canvas:#fff;--paper:#fff;--green-900:#222d49;--green-700:#365cf5;--green-100:#edf1ff;--green-50:#f7f9ff}
+body{background:#eff2f8;color:#222d49}.main{background:#fff;border-color:#e3e8f3}
+.sidebar{background:#365cf5}.sidebar-brand{background:transparent}.sidebar .navitem{color:#e0e7ff}.sidebar .navitem:hover{background:#ffffff18;color:#fff}.sidebar .navitem.active{background:#fff;color:#365cf5}.sidebar .navitem.active svg{color:#365cf5}
+.heading h1,.section-heading h2,.meal h3,.note h2,.expiry-header h2,.macro-top h2{color:#222d49}.heading{border-bottom-color:#e9edf5}
+.profile-icon{background:#f4e663;color:#4d4719;border-color:#f4e663}
+.meal,.meal:nth-child(2),.meal:nth-child(3){--card-color:#f2f5fc}.meal::before{border-color:#e2e8f5}.meal .type,.meal:nth-child(2) .type,.meal:nth-child(3) .type{color:#5570b3}.meta,.meal-ingredients{color:#737e96}
+.actions .cook{background:#365cf5;color:#fff;border-color:#365cf5}.actions .swap{background:#fff;color:#365cf5;border-color:#dfe6f7}.recipe-link{color:#365cf5}
+.macro-breakdown{background:#fff;border-color:#e3e8f3}.macro-energy strong,.macro-key strong{color:#222d49}.macro-top p,.macro-key dt,.macro-key dd>span,.macro-energy>span{color:#6d7991}.macro-key>div+div{border-color:#e4e9f3}.bar-protein{background:#365cf5}.bar-carbs{background:#91b8ed}.bar-fat{background:#f4e663}
+.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card,.rail .budget-card{background:#f8faff;border-color:#e3e9f5}
+.expiry-count,.shopping-count{background:#e9efff;color:#4868bd}.expiry-list{background:#fff;border-color:#e5eaf5}.expiry-image{background:#eef3fd}.expiry-subtitle,.note .muted,.budget small{color:#7a859a}.expiry-name,.shopping-items label{color:#485776}
+.expiry-badge{background:#edf1fa;color:#61749b}.expiry-badge.urgent{background:#fff4b5;color:#7b681c}.expiry-badge.urgent>span{background:#b7981d}
+.budget span{color:#365cf5}.progress{background:#e2e9fb}.progress div{background:#365cf5}
+.shopping-items input{background:#fff;border-color:#b8c7e8}.shopping-items input:checked{background:#365cf5;border-color:#365cf5}.shopping-items label,.shopping-items label+label,.expiry-row+.expiry-row{border-color:#e5eaf4}
+.meal-dialog{background:#fff;color:#222d49;border-color:#e3e8f3}.dialog-heading button{background:#edf2ff;color:#365cf5}.week-table .current-day{background:#edf2ff}.week-table th,.week-table td{border-color:#e5eaf5}
+@media(max-width:700px){.sidebar .navitem.active{background:#f4e663;color:#222d49}}
+</style><style id="green-blue-yellow-palette">
+:root{--forest:#245d46;--ink:#263d37;--canvas:#fff;--paper:#fff;--green-900:#245d46;--green-700:#365cf5;--green-100:#edf6ec;--green-50:#f7faf5}
+body{background:#f0f4ef;color:#263d37}.main{background:#fff;border-color:#e3ebe1}
+.sidebar{background:#245d46}.sidebar .navitem{color:#d2eadb}.sidebar .navitem:hover{background:#ffffff15;color:#fff}.sidebar .navitem.active{background:#fff;color:#245d46}.sidebar .navitem.active svg{color:#245d46}
+.heading h1,.section-heading h2,.note h2,.expiry-header h2,.macro-top h2{color:#29483b}
+.meal{--card-color:#edf5e9}.meal:nth-child(2){--card-color:#edf2ff}.meal:nth-child(3){--card-color:#fff8d9}
+.meal::before{border-color:#263d370d}.meal h3{color:#2d4137}
+.meal .type{color:#548047}.meal:nth-child(2) .type{color:#5570b3}.meal:nth-child(3) .type{color:#8b792b}
+.meta,.meal-ingredients{color:#707c6b}
+.actions .cook{background:#365cf5;color:#fff}.actions .swap{background:#fff;color:#365cf5;border-color:#e0e7f3}.recipe-link{color:#365cf5}
+.profile-icon{background:#f4e663;color:#4d4719;border-color:#f4e663}
+.macro-breakdown{background:#fff;border-color:#e3e9df}.macro-energy strong,.macro-key strong{color:#29483b}
+.bar-protein{background:#64a36a}.bar-carbs{background:#587cf0}.bar-fat{background:#ead754}
+.rail .note.expiry-card:first-child{background:#f5f9f1;border-color:#e3ecdc}.rail .shopping-card{background:#f5f8ff;border-color:#e3e9f7}.rail .budget-card{background:#fffbed;border-color:#f0eacb}
+.expiry-count{background:#e6f0dc;color:#5a7c43}.expiry-image{background:#edf5e5}.expiry-name{color:#45643b}.expiry-list{border-color:#e4ecdc}.expiry-subtitle{color:#7a8c6d}
+.expiry-badge{background:#eaf3e2;color:#5f7b46}.expiry-badge.urgent{background:#fff1af;color:#89701e}.expiry-badge.urgent>span{background:#b99b29}
+.shopping-count{background:#e9efff;color:#4868bd}.shopping-items input:checked{background:#365cf5;border-color:#365cf5}
+.budget span{color:#375d40}.budget small,.budget-card .muted{color:#8a8766}.progress{background:#eae9cc}.progress div{background:#80b35c}
+.heading{border-bottom-color:#e7ede3}
+@media(max-width:700px){.sidebar .navitem.active{background:#f4e663;color:#29483b}}
+</style><style id="larger-plates-no-counts">
+.meal img{max-width:clamp(180px,27vh,260px)}
+.meal::before{top:min(calc(50cqw - var(--card-padding)),clamp(90px,13.5vh,130px))}
+@media(max-width:700px){.meal img{max-width:180px}.meal::before{top:min(calc(50cqw - var(--card-padding)),90px)}}
+</style><style id="green-primary-color-hierarchy">
+body{background:#f0f4ef}.sidebar{background:#245d46}
+.meal,.meal:nth-child(2),.meal:nth-child(3){--card-color:#edf5e9}
+.meal .type,.meal:nth-child(2) .type,.meal:nth-child(3) .type{color:#548047}
+.actions .cook{background:#2f7653;color:#fff;border-color:#2f7653}
+.actions .swap{background:#fff;color:#5278ce;border-color:#dde6f3}
+.recipe-link{color:#426dcc}
+.profile-icon{background:#e6f0e2;color:#245d46;border-color:#d9e6d2}
+.rail .note,.rail .note:nth-child(2),.rail .note.expiry-card:first-child,.rail .shopping-card,.rail .budget-card{background:#f5f9f1;border-color:#e3ecdc}
+.shopping-items label{color:#45643b}.shopping-items input{border-color:#b6c9aa}.shopping-items input:checked{background:#2f7653;border-color:#2f7653}
+.budget span{color:#2f7653}.budget small,.budget-card .muted{color:#7a8c6d}.progress{background:#dfead5}.progress div{background:#75aa62}
+.expiry-badge.urgent{background:#fff1af;color:#89701e}.expiry-badge.urgent>span{background:#b99b29}
+.bar-protein{background:#64a36a}.bar-carbs{background:#587cf0}.bar-fat{background:#ead754}
+.meal-dialog{color:#29483b}.dialog-heading button{background:#edf5e9;color:#245d46}.week-table .current-day{background:#edf5e9}
+@media(max-width:700px){.sidebar .navitem.active{background:#edf5e9;color:#245d46}}
+</style><style id="cooked-interaction-and-logo">
+.sidebar .colored-logo{display:block;width:150px;height:36px;max-width:100%;aspect-ratio:150/36;flex-shrink:0;overflow:visible;filter:none;mix-blend-mode:normal}.sidebar-brand{min-height:40px;flex-shrink:0;overflow:visible}
+.actions button.cook{cursor:pointer;transition:background .15s,color .15s}.actions button.cook:hover{background:#245d46}.actions button.cook.done{background:#e1edda;color:#305334;border:1px solid #adc69b}.actions button.cook.done:hover{background:#d6e5cd}.cook-undo{font-size:10px;text-decoration:underline;text-underline-offset:2px;margin-left:auto;opacity:.8}.cook-undo[hidden]{display:none}.actions button.cook:focus-visible{outline:3px solid #5478ce;outline-offset:3px}
+@media(max-width:700px){.sidebar .colored-logo{width:125px;height:30px}.cook-undo{font-size:9px}}
+<style id="final-layout-polish">.shell{gap:0}.sidebar{border-radius:26px 0 0 26px}.main{border-radius:0 26px 26px 0}.sidebar .navitem.active{margin-right:-18px;padding-right:30px;border-radius:12px 0 0 12px}.welcome-eyebrow{display:none}body,body button,body input,body select,body h1,body h2,body h3,body p,body span,body label,body a{font-family:"Segoe UI",Arial,Helvetica,sans-serif}.heading h1,h1,h2,.meal h3,.weekheader h2,.listbutton strong,.nutrition strong,.primary,.day span,.sidebar-bottom{font-family:"Segoe UI",Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:-1.5px}@media(min-width:1001px){html,body{height:100%;overflow:hidden}.shell{height:calc(100vh - 32px);min-height:640px;max-width:1640px;padding:16px;grid-template-columns:220px minmax(0,1fr);gap:0}.main{height:100%;overflow:hidden}.heading h1{margin-top:0}}@media(max-width:700px){html,body{height:auto;overflow:auto}.sidebar,.main{border-radius:0}.sidebar .navitem.active{margin-right:0;padding-right:12px;border-radius:12px}}</style></head><body><div class="shell"><aside class="sidebar"><div class="sidebar-brand"><svg class="logo colored-logo" viewBox="0 0 150 36" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Cooked"><path d="M16 11C8 6 2 11 2 20c0 8 6 13 14 13s14-5 14-13c0-9-6-14-14-9Z" fill="#ed664b" stroke="#aa422f" stroke-width="1.2"/><path d="M16 13C12 8 8 8 5 9l7 3-5 3 8-1 5 3-2-5 8-3c-5-1-8 0-10 4Z" fill="#79a869"/><path d="M16 10c-1-3 0-5 2-7" fill="none" stroke="#79a869" stroke-width="2" stroke-linecap="round"/><path d="M7 17c-1 2-1 4 0 6" fill="none" stroke="#ffb096" stroke-width="1.7" stroke-linecap="round"/><text x="40" y="27" fill="#fffdf7" font-family="Segoe UI,Arial,Helvetica,sans-serif" font-size="26" font-weight="700" letter-spacing="-.6">Cooked</text></svg></div><nav aria-label="Main navigation" class="nav"><div class="navitem active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Dashboard</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"/></svg>Meal Planner</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM6 11h12M9 7v2M9 14v3"/></svg>Fridge</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l2 11h9l2-8H7M10 20h.01M17 20h.01"/></svg>Shopping List</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M15 14h3"/></svg>Budget</div></nav></aside><main class="main"><div class="heading"><div></div><div class="header-account"><span class="profile-icon" role="img" aria-label="User profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1"/></svg></span></div></div><div class="content"><section class="today-section" aria-labelledby="today-heading"><div class="section-heading"><h2 id="today-heading">Today&#8217;s meals</h2></div><div class="meals" id="meals"><article class="meal"><img alt="Overhead photograph of Berry yogurt bowl" src="../assets/images/yogurt.png"/><div class="type">BREAKFAST</div><h3>Berry yogurt bowl</h3><div class="meta">5 min &middot; 320 kcal</div><div class="meal-ingredients">&#129379; Yogurt &nbsp; &#127827; Berries &nbsp; &#127855; Honey</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Pesto pasta salad" src="../assets/images/pasta_dish.png"/><div class="type">LUNCH</div><h3>Pesto pasta salad</h3><div class="meta">25 min &middot; 530 kcal</div><div class="meal-ingredients">&#127837; Pasta &nbsp; &#127807; Pesto &nbsp; &#127813; Tomatoes</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Tofu veggie bowl" src="../assets/images/tofu.png"/><div class="type">DINNER</div><h3>Tofu veggie bowl</h3><div class="meta">20 min &middot; 570 kcal</div><div class="meal-ingredients">&#129480; Tofu &nbsp; &#129382; Broccoli &nbsp; &#127834; Rice</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article></div><section class="macro-breakdown" aria-labelledby="macro-title"><div class="macro-top"><div><h2 id="macro-title">Daily nutrition</h2><p>Planned meals</p></div><div class="macro-energy"><strong id="cal">1,420</strong><span>kcal total</span></div></div><div class="macro-bar" role="img" aria-label="Estimated calorie breakdown: protein 20 percent, carbs 56 percent, fat 24 percent"><span class="bar-protein" style="flex:20"></span><span class="bar-carbs" style="flex:56"></span><span class="bar-fat" style="flex:24"></span></div><dl class="macro-key"><div><dt><i class="bar-protein" aria-hidden="true"></i>Protein</dt><dd><strong>70 g</strong><span>20% of calories</span></dd></div><div><dt><i class="bar-carbs" aria-hidden="true"></i>Carbs</dt><dd><strong>200 g</strong><span>56% of calories</span></dd></div><div><dt><i class="bar-fat" aria-hidden="true"></i>Fat</dt><dd><strong>38 g</strong><span>24% of calories</span></dd></div></dl></section></section><aside class="rail" aria-labelledby="kitchen-heading"><div class="section-heading kitchen-heading"><h2 id="kitchen-heading">Kitchen essentials</h2></div><section class="note expiry-card"><div class="expiry-header"><h2>Expiring soon</h2></div><p class="expiry-subtitle">Use these first to reduce waste.</p><div class="expiry-list"><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Spinach-Small.png"/></span><span class="expiry-name">Spinach</span><span class="expiry-badge urgent">Tomorrow</span></div><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Milk-Small.png"/></span><span class="expiry-name">Milk</span><span class="expiry-badge">In 2 days</span></div></div></section><section class="note shopping-card"><a class="shopping-card-link" href="Shopping-list.html"><div class="shopping-header"><h2>Shopping List</h2><span aria-hidden="true">View all</span></div></a><div class="shopping-items"><label>Rolled oats</label><label>Bananas</label><label>Chickpeas</label><label>Brown rice</label><label>Sweet potatoes</label><label>Avocados</label><label>Wholegrain bread</label><label>Lentils</label></div></section><section class="note budget-card"><h2>Weekly budget</h2><div class="budget"><span>BD 12</span> <small>of BD 40</small></div><div aria-label="Estimated grocery spending" aria-valuemax="40" aria-valuemin="0" aria-valuenow="12" class="progress" role="meter"><div></div></div><p class="muted">BD 28 left &middot; estimated groceries</p></section></aside></div></main></div><dialog class="meal-dialog" id="recipe-0" aria-labelledby="recipe-title-0"><div class="dialog-heading"><h2 id="recipe-title-0">Berry yogurt bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>200 g Greek yogurt</li><li>100 g mixed berries</li><li>30 g granola</li><li>1 tsp honey</li></ul><h3>Method</h3><ol><li>Spoon the yogurt into a bowl.</li><li>Wash the berries and add them on top.</li><li>Finish with granola and a drizzle of honey.</li></ol></dialog><dialog class="meal-dialog" id="recipe-1" aria-labelledby="recipe-title-1"><div class="dialog-heading"><h2 id="recipe-title-1">Pesto pasta salad</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>75 g dry pasta</li><li>1 tbsp pesto</li><li>100 g cherry tomatoes</li><li>A handful of baby spinach</li><li>1 tsp olive oil</li></ul><h3>Method</h3><ol><li>Cook the pasta according to its packet, then drain and cool slightly.</li><li>Halve the tomatoes and rinse the spinach.</li><li>Toss the pasta with pesto, olive oil, tomatoes and spinach.</li></ol></dialog><dialog class="meal-dialog" id="recipe-2" aria-labelledby="recipe-title-2"><div class="dialog-heading"><h2 id="recipe-title-2">Tofu veggie bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>150 g firm tofu</li><li>150 g cooked rice</li><li>100 g broccoli</li><li>1 small carrot</li><li>1 tbsp soy sauce</li><li>1 tsp oil</li></ul><h3>Method</h3><ol><li>Pat the tofu dry and cut it into cubes. Slice the carrot and cut the broccoli into florets.</li><li>Heat the oil in a pan and cook the tofu until golden.</li><li>Add the vegetables with a splash of water and cook until tender. Stir in the soy sauce.</li><li>Serve over the cooked rice.</li></ol></dialog><dialog class="meal-dialog week-dialog" id="weekly-plan" aria-labelledby="week-title"><div class="dialog-heading"><h2 id="week-title">Full week plan</h2><button type="button" data-close aria-label="Close weekly plan">&#215;</button></div><p class="dialog-caption">Sample weekly menu, including today's meals.</p><div class="week-table-wrap"><table class="week-table"><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th scope="row">Mon</th><td>Overnight oats</td><td>Chickpea wrap</td><td>Vegetable curry</td></tr><tr class="current-day"><th scope="row">Tue ? Today</th><td>Berry yogurt bowl</td><td>Pesto pasta salad</td><td>Tofu veggie bowl</td></tr><tr><th scope="row">Wed</th><td>Banana toast</td><td>Lentil soup</td><td>Roasted vegetable rice</td></tr><tr><th scope="row">Thu</th><td>Apple porridge</td><td>Hummus wrap</td><td>Chickpea stew</td></tr><tr><th scope="row">Fri</th><td>Scrambled eggs</td><td>Quinoa salad</td><td>Vegetable noodles</td></tr><tr><th scope="row">Sat</th><td>Banana pancakes</td><td>Baked sweet potato</td><td>Bean tacos</td></tr><tr><th scope="row">Sun</th><td>Fruit and oats</td><td>Rice and bean bowl</td><td>Roasted vegetable couscous</td></tr></tbody></table></div></dialog><script>
+<style id="compact-dashboard-layout">
+@media(min-width:1001px){
+  .shell{padding:10px}
+  .main{padding:12px 22px}
+  .heading{margin-bottom:7px;padding-bottom:7px}
+  .heading h1{font-size:38px;line-height:1.05;letter-spacing:-1.8px}
+  .content{gap:5px;padding-bottom:10px}
+  .section-heading{margin-bottom:5px}
+  .meals{gap:12px}
+  .meal{padding-bottom:8px}
+  .meal img{max-width:clamp(125px,18vh,160px)}
+  .meal h3{font-size:18px;margin:4px 0}
+  .meal .actions{padding-top:6px}
+  .nutrition.fitness-nutrition{margin-top:8px;padding:8px 14px}
+  .fitness-rings{width:78px;height:78px}
+  .content>.rail{gap:6px 10px;margin-bottom:4px}
+  .rail .note,.rail .note.expiry-card{padding:7px 10px}
+  .rail .note h2{font-size:14px;margin-bottom:6px}
+  .rail .expiry-row{padding:3px 0}
+  .rail .shopping-items label{min-height:22px;padding:2px 0}
+  .shopping-items{margin-top:5px}
+  .budget-card .budget{margin:8px 0}
+}
+</style></style></head><body><div class="shell"><aside class="sidebar"><div class="sidebar-brand"><svg class="logo colored-logo" viewBox="0 0 150 36" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Cooked"><path d="M16 11C8 6 2 11 2 20c0 8 6 13 14 13s14-5 14-13c0-9-6-14-14-9Z" fill="#ed664b" stroke="#aa422f" stroke-width="1.2"/><path d="M16 13C12 8 8 8 5 9l7 3-5 3 8-1 5 3-2-5 8-3c-5-1-8 0-10 4Z" fill="#79a869"/><path d="M16 10c-1-3 0-5 2-7" fill="none" stroke="#79a869" stroke-width="2" stroke-linecap="round"/><path d="M7 17c-1 2-1 4 0 6" fill="none" stroke="#ffb096" stroke-width="1.7" stroke-linecap="round"/><text x="40" y="27" fill="#fffdf7" font-family="Segoe UI,Arial,Helvetica,sans-serif" font-size="26" font-weight="700" letter-spacing="-.6">Cooked</text></svg></div><nav aria-label="Main navigation" class="nav"><div class="navitem active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Dashboard</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"/></svg>Meal Planner</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM6 11h12M9 7v2M9 14v3"/></svg>Fridge</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l2 11h9l2-8H7M10 20h.01M17 20h.01"/></svg>Shopping List</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M15 14h3"/></svg>Budget</div></nav></aside><main class="main"><div class="heading"><div></div><div class="header-account"><span class="profile-icon" role="img" aria-label="User profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1"/></svg></span></div></div><div class="content"><section class="today-section" aria-labelledby="today-heading"><div class="section-heading"><h2 id="today-heading">Today&#8217;s meals</h2></div><div class="meals" id="meals"><article class="meal"><img alt="Overhead photograph of Berry yogurt bowl" src="../assets/images/yogurt.png"/><div class="type">BREAKFAST</div><h3>Berry yogurt bowl</h3><div class="meta">5 min &middot; 320 kcal</div><div class="meal-ingredients">&#129379; Yogurt &nbsp; &#127827; Berries &nbsp; &#127855; Honey</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Pesto pasta salad" src="../assets/images/pasta_dish.png"/><div class="type">LUNCH</div><h3>Pesto pasta salad</h3><div class="meta">25 min &middot; 530 kcal</div><div class="meal-ingredients">&#127837; Pasta &nbsp; &#127807; Pesto &nbsp; &#127813; Tomatoes</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Tofu veggie bowl" src="../assets/images/tofu.png"/><div class="type">DINNER</div><h3>Tofu veggie bowl</h3><div class="meta">20 min &middot; 570 kcal</div><div class="meal-ingredients">&#129480; Tofu &nbsp; &#129382; Broccoli &nbsp; &#127834; Rice</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article></div><section class="macro-breakdown" aria-labelledby="macro-title"><div class="macro-top"><div><h2 id="macro-title">Daily nutrition</h2><p>Planned meals</p></div><div class="macro-energy"><strong id="cal">1,420</strong><span>kcal total</span></div></div><div class="macro-bar" role="img" aria-label="Estimated calorie breakdown: protein 20 percent, carbs 56 percent, fat 24 percent"><span class="bar-protein" style="flex:20"></span><span class="bar-carbs" style="flex:56"></span><span class="bar-fat" style="flex:24"></span></div><dl class="macro-key"><div><dt><i class="bar-protein" aria-hidden="true"></i>Protein</dt><dd><strong>70 g</strong><span>20% of calories</span></dd></div><div><dt><i class="bar-carbs" aria-hidden="true"></i>Carbs</dt><dd><strong>200 g</strong><span>56% of calories</span></dd></div><div><dt><i class="bar-fat" aria-hidden="true"></i>Fat</dt><dd><strong>38 g</strong><span>24% of calories</span></dd></div></dl></section></section><aside class="rail" aria-labelledby="kitchen-heading"><div class="section-heading kitchen-heading"><h2 id="kitchen-heading">Kitchen essentials</h2></div><section class="note expiry-card"><div class="expiry-header"><h2>Expiring soon</h2></div><p class="expiry-subtitle">Use these first to reduce waste.</p><div class="expiry-list"><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Spinach-Small.png"/></span><span class="expiry-name">Spinach</span><span class="expiry-badge urgent">Tomorrow</span></div><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Milk-Small.png"/></span><span class="expiry-name">Milk</span><span class="expiry-badge">In 2 days</span></div></div></section><section class="note shopping-card"><a class="shopping-card-link" href="Shopping-list.html"><div class="shopping-header"><h2>Shopping List</h2><span aria-hidden="true">View all</span></div></a><div class="shopping-items"><label>Rolled oats</label><label>Bananas</label><label>Chickpeas</label><label>Brown rice</label><label>Sweet potatoes</label><label>Avocados</label><label>Wholegrain bread</label><label>Lentils</label></div></section><section class="note budget-card"><h2>Weekly budget</h2><div class="budget"><span>BD 12</span> <small>of BD 40</small></div><div aria-label="Estimated grocery spending" aria-valuemax="40" aria-valuemin="0" aria-valuenow="12" class="progress" role="meter"><div></div></div><p class="muted">BD 28 left &middot; estimated groceries</p></section></aside></div></main></div><dialog class="meal-dialog" id="recipe-0" aria-labelledby="recipe-title-0"><div class="dialog-heading"><h2 id="recipe-title-0">Berry yogurt bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>200 g Greek yogurt</li><li>100 g mixed berries</li><li>30 g granola</li><li>1 tsp honey</li></ul><h3>Method</h3><ol><li>Spoon the yogurt into a bowl.</li><li>Wash the berries and add them on top.</li><li>Finish with granola and a drizzle of honey.</li></ol></dialog><dialog class="meal-dialog" id="recipe-1" aria-labelledby="recipe-title-1"><div class="dialog-heading"><h2 id="recipe-title-1">Pesto pasta salad</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>75 g dry pasta</li><li>1 tbsp pesto</li><li>100 g cherry tomatoes</li><li>A handful of baby spinach</li><li>1 tsp olive oil</li></ul><h3>Method</h3><ol><li>Cook the pasta according to its packet, then drain and cool slightly.</li><li>Halve the tomatoes and rinse the spinach.</li><li>Toss the pasta with pesto, olive oil, tomatoes and spinach.</li></ol></dialog><dialog class="meal-dialog" id="recipe-2" aria-labelledby="recipe-title-2"><div class="dialog-heading"><h2 id="recipe-title-2">Tofu veggie bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>150 g firm tofu</li><li>150 g cooked rice</li><li>100 g broccoli</li><li>1 small carrot</li><li>1 tbsp soy sauce</li><li>1 tsp oil</li></ul><h3>Method</h3><ol><li>Pat the tofu dry and cut it into cubes. Slice the carrot and cut the broccoli into florets.</li><li>Heat the oil in a pan and cook the tofu until golden.</li><li>Add the vegetables with a splash of water and cook until tender. Stir in the soy sauce.</li><li>Serve over the cooked rice.</li></ol></dialog><dialog class="meal-dialog week-dialog" id="weekly-plan" aria-labelledby="week-title"><div class="dialog-heading"><h2 id="week-title">Full week plan</h2><button type="button" data-close aria-label="Close weekly plan">&#215;</button></div><p class="dialog-caption">Sample weekly menu, including today's meals.</p><div class="week-table-wrap"><table class="week-table"><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th scope="row">Mon</th><td>Overnight oats</td><td>Chickpea wrap</td><td>Vegetable curry</td></tr><tr class="current-day"><th scope="row">Tue ? Today</th><td>Berry yogurt bowl</td><td>Pesto pasta salad</td><td>Tofu veggie bowl</td></tr><tr><th scope="row">Wed</th><td>Banana toast</td><td>Lentil soup</td><td>Roasted vegetable rice</td></tr><tr><th scope="row">Thu</th><td>Apple porridge</td><td>Hummus wrap</td><td>Chickpea stew</td></tr><tr><th scope="row">Fri</th><td>Scrambled eggs</td><td>Quinoa salad</td><td>Vegetable noodles</td></tr><tr><th scope="row">Sat</th><td>Banana pancakes</td><td>Baked sweet potato</td><td>Bean tacos</td></tr><tr><th scope="row">Sun</th><td>Fruit and oats</td><td>Rice and bean bowl</td><td>Roasted vegetable couscous</td></tr></tbody></table></div></dialog><script>
+<style id="zoom-safe-layout">
+@media(min-width:1001px) and (max-height:760px){
+  html,body{height:auto;overflow:auto}
+  .shell{height:auto;min-height:100vh}
+  .main{height:auto;min-height:calc(100vh - 20px);overflow:visible}
+  .content{padding-bottom:18px}
+}
+</style></style></head><body><div class="shell"><aside class="sidebar"><div class="sidebar-brand"><svg class="logo colored-logo" viewBox="0 0 150 36" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Cooked"><path d="M16 11C8 6 2 11 2 20c0 8 6 13 14 13s14-5 14-13c0-9-6-14-14-9Z" fill="#ed664b" stroke="#aa422f" stroke-width="1.2"/><path d="M16 13C12 8 8 8 5 9l7 3-5 3 8-1 5 3-2-5 8-3c-5-1-8 0-10 4Z" fill="#79a869"/><path d="M16 10c-1-3 0-5 2-7" fill="none" stroke="#79a869" stroke-width="2" stroke-linecap="round"/><path d="M7 17c-1 2-1 4 0 6" fill="none" stroke="#ffb096" stroke-width="1.7" stroke-linecap="round"/><text x="40" y="27" fill="#fffdf7" font-family="Segoe UI,Arial,Helvetica,sans-serif" font-size="26" font-weight="700" letter-spacing="-.6">Cooked</text></svg></div><nav aria-label="Main navigation" class="nav"><div class="navitem active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Dashboard</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"/></svg>Meal Planner</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM6 11h12M9 7v2M9 14v3"/></svg>Fridge</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l2 11h9l2-8H7M10 20h.01M17 20h.01"/></svg>Shopping List</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M15 14h3"/></svg>Budget</div></nav></aside><main class="main"><div class="heading"><div></div><div class="header-account"><span class="profile-icon" role="img" aria-label="User profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1"/></svg></span></div></div><div class="content"><section class="today-section" aria-labelledby="today-heading"><div class="section-heading"><h2 id="today-heading">Today&#8217;s meals</h2></div><div class="meals" id="meals"><article class="meal"><img alt="Overhead photograph of Berry yogurt bowl" src="../assets/images/yogurt.png"/><div class="type">BREAKFAST</div><h3>Berry yogurt bowl</h3><div class="meta">5 min &middot; 320 kcal</div><div class="meal-ingredients">&#129379; Yogurt &nbsp; &#127827; Berries &nbsp; &#127855; Honey</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Pesto pasta salad" src="../assets/images/pasta_dish.png"/><div class="type">LUNCH</div><h3>Pesto pasta salad</h3><div class="meta">25 min &middot; 530 kcal</div><div class="meal-ingredients">&#127837; Pasta &nbsp; &#127807; Pesto &nbsp; &#127813; Tomatoes</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Tofu veggie bowl" src="../assets/images/tofu.png"/><div class="type">DINNER</div><h3>Tofu veggie bowl</h3><div class="meta">20 min &middot; 570 kcal</div><div class="meal-ingredients">&#129480; Tofu &nbsp; &#129382; Broccoli &nbsp; &#127834; Rice</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article></div><section class="macro-breakdown" aria-labelledby="macro-title"><div class="macro-top"><div><h2 id="macro-title">Daily nutrition</h2><p>Planned meals</p></div><div class="macro-energy"><strong id="cal">1,420</strong><span>kcal total</span></div></div><div class="macro-bar" role="img" aria-label="Estimated calorie breakdown: protein 20 percent, carbs 56 percent, fat 24 percent"><span class="bar-protein" style="flex:20"></span><span class="bar-carbs" style="flex:56"></span><span class="bar-fat" style="flex:24"></span></div><dl class="macro-key"><div><dt><i class="bar-protein" aria-hidden="true"></i>Protein</dt><dd><strong>70 g</strong><span>20% of calories</span></dd></div><div><dt><i class="bar-carbs" aria-hidden="true"></i>Carbs</dt><dd><strong>200 g</strong><span>56% of calories</span></dd></div><div><dt><i class="bar-fat" aria-hidden="true"></i>Fat</dt><dd><strong>38 g</strong><span>24% of calories</span></dd></div></dl></section></section><aside class="rail" aria-labelledby="kitchen-heading"><div class="section-heading kitchen-heading"><h2 id="kitchen-heading">Kitchen essentials</h2></div><section class="note expiry-card"><div class="expiry-header"><h2>Expiring soon</h2></div><p class="expiry-subtitle">Use these first to reduce waste.</p><div class="expiry-list"><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Spinach-Small.png"/></span><span class="expiry-name">Spinach</span><span class="expiry-badge urgent">Tomorrow</span></div><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Milk-Small.png"/></span><span class="expiry-name">Milk</span><span class="expiry-badge">In 2 days</span></div></div></section><section class="note shopping-card"><a class="shopping-card-link" href="Shopping-list.html"><div class="shopping-header"><h2>Shopping List</h2><span aria-hidden="true">View all</span></div></a><div class="shopping-items"><label>Rolled oats</label><label>Bananas</label><label>Chickpeas</label><label>Brown rice</label><label>Sweet potatoes</label><label>Avocados</label><label>Wholegrain bread</label><label>Lentils</label></div></section><section class="note budget-card"><h2>Weekly budget</h2><div class="budget"><span>BD 12</span> <small>of BD 40</small></div><div aria-label="Estimated grocery spending" aria-valuemax="40" aria-valuemin="0" aria-valuenow="12" class="progress" role="meter"><div></div></div><p class="muted">BD 28 left &middot; estimated groceries</p></section></aside></div></main></div><dialog class="meal-dialog" id="recipe-0" aria-labelledby="recipe-title-0"><div class="dialog-heading"><h2 id="recipe-title-0">Berry yogurt bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>200 g Greek yogurt</li><li>100 g mixed berries</li><li>30 g granola</li><li>1 tsp honey</li></ul><h3>Method</h3><ol><li>Spoon the yogurt into a bowl.</li><li>Wash the berries and add them on top.</li><li>Finish with granola and a drizzle of honey.</li></ol></dialog><dialog class="meal-dialog" id="recipe-1" aria-labelledby="recipe-title-1"><div class="dialog-heading"><h2 id="recipe-title-1">Pesto pasta salad</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>75 g dry pasta</li><li>1 tbsp pesto</li><li>100 g cherry tomatoes</li><li>A handful of baby spinach</li><li>1 tsp olive oil</li></ul><h3>Method</h3><ol><li>Cook the pasta according to its packet, then drain and cool slightly.</li><li>Halve the tomatoes and rinse the spinach.</li><li>Toss the pasta with pesto, olive oil, tomatoes and spinach.</li></ol></dialog><dialog class="meal-dialog" id="recipe-2" aria-labelledby="recipe-title-2"><div class="dialog-heading"><h2 id="recipe-title-2">Tofu veggie bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>150 g firm tofu</li><li>150 g cooked rice</li><li>100 g broccoli</li><li>1 small carrot</li><li>1 tbsp soy sauce</li><li>1 tsp oil</li></ul><h3>Method</h3><ol><li>Pat the tofu dry and cut it into cubes. Slice the carrot and cut the broccoli into florets.</li><li>Heat the oil in a pan and cook the tofu until golden.</li><li>Add the vegetables with a splash of water and cook until tender. Stir in the soy sauce.</li><li>Serve over the cooked rice.</li></ol></dialog><dialog class="meal-dialog week-dialog" id="weekly-plan" aria-labelledby="week-title"><div class="dialog-heading"><h2 id="week-title">Full week plan</h2><button type="button" data-close aria-label="Close weekly plan">&#215;</button></div><p class="dialog-caption">Sample weekly menu, including today's meals.</p><div class="week-table-wrap"><table class="week-table"><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th scope="row">Mon</th><td>Overnight oats</td><td>Chickpea wrap</td><td>Vegetable curry</td></tr><tr class="current-day"><th scope="row">Tue ? Today</th><td>Berry yogurt bowl</td><td>Pesto pasta salad</td><td>Tofu veggie bowl</td></tr><tr><th scope="row">Wed</th><td>Banana toast</td><td>Lentil soup</td><td>Roasted vegetable rice</td></tr><tr><th scope="row">Thu</th><td>Apple porridge</td><td>Hummus wrap</td><td>Chickpea stew</td></tr><tr><th scope="row">Fri</th><td>Scrambled eggs</td><td>Quinoa salad</td><td>Vegetable noodles</td></tr><tr><th scope="row">Sat</th><td>Banana pancakes</td><td>Baked sweet potato</td><td>Bean tacos</td></tr><tr><th scope="row">Sun</th><td>Fruit and oats</td><td>Rice and bean bowl</td><td>Roasted vegetable couscous</td></tr></tbody></table></div></dialog><script>
+<style id="full-viewport-layout">
+@media(min-width:1001px){
+  .shell{width:100%;height:100vh;min-height:0;max-width:none;padding:0}
+  .sidebar,.main{border-radius:0}
+  .main{min-height:0}
+}
+@media(min-width:1001px) and (max-height:760px){
+  html,body{height:auto;overflow:auto}
+  .shell{height:auto;min-height:100vh}
+  .main{height:auto;min-height:100vh;overflow:visible}
+}
+</style></style></head><body><div class="shell"><aside class="sidebar"><div class="sidebar-brand"><svg class="logo colored-logo" viewBox="0 0 150 36" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Cooked"><path d="M16 11C8 6 2 11 2 20c0 8 6 13 14 13s14-5 14-13c0-9-6-14-14-9Z" fill="#ed664b" stroke="#aa422f" stroke-width="1.2"/><path d="M16 13C12 8 8 8 5 9l7 3-5 3 8-1 5 3-2-5 8-3c-5-1-8 0-10 4Z" fill="#79a869"/><path d="M16 10c-1-3 0-5 2-7" fill="none" stroke="#79a869" stroke-width="2" stroke-linecap="round"/><path d="M7 17c-1 2-1 4 0 6" fill="none" stroke="#ffb096" stroke-width="1.7" stroke-linecap="round"/><text x="40" y="27" fill="#fffdf7" font-family="Segoe UI,Arial,Helvetica,sans-serif" font-size="26" font-weight="700" letter-spacing="-.6">Cooked</text></svg></div><nav aria-label="Main navigation" class="nav"><div class="navitem active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Dashboard</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"/></svg>Meal Planner</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM6 11h12M9 7v2M9 14v3"/></svg>Fridge</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l2 11h9l2-8H7M10 20h.01M17 20h.01"/></svg>Shopping List</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M15 14h3"/></svg>Budget</div></nav></aside><main class="main"><div class="heading"><div></div><div class="header-account"><span class="profile-icon" role="img" aria-label="User profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1"/></svg></span></div></div><div class="content"><section class="today-section" aria-labelledby="today-heading"><div class="section-heading"><h2 id="today-heading">Today&#8217;s meals</h2></div><div class="meals" id="meals"><article class="meal"><img alt="Overhead photograph of Berry yogurt bowl" src="../assets/images/yogurt.png"/><div class="type">BREAKFAST</div><h3>Berry yogurt bowl</h3><div class="meta">5 min &middot; 320 kcal</div><div class="meal-ingredients">&#129379; Yogurt &nbsp; &#127827; Berries &nbsp; &#127855; Honey</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Pesto pasta salad" src="../assets/images/pasta_dish.png"/><div class="type">LUNCH</div><h3>Pesto pasta salad</h3><div class="meta">25 min &middot; 530 kcal</div><div class="meal-ingredients">&#127837; Pasta &nbsp; &#127807; Pesto &nbsp; &#127813; Tomatoes</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Tofu veggie bowl" src="../assets/images/tofu.png"/><div class="type">DINNER</div><h3>Tofu veggie bowl</h3><div class="meta">20 min &middot; 570 kcal</div><div class="meal-ingredients">&#129480; Tofu &nbsp; &#129382; Broccoli &nbsp; &#127834; Rice</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article></div><section class="macro-breakdown" aria-labelledby="macro-title"><div class="macro-top"><div><h2 id="macro-title">Daily nutrition</h2><p>Planned meals</p></div><div class="macro-energy"><strong id="cal">1,420</strong><span>kcal total</span></div></div><div class="macro-bar" role="img" aria-label="Estimated calorie breakdown: protein 20 percent, carbs 56 percent, fat 24 percent"><span class="bar-protein" style="flex:20"></span><span class="bar-carbs" style="flex:56"></span><span class="bar-fat" style="flex:24"></span></div><dl class="macro-key"><div><dt><i class="bar-protein" aria-hidden="true"></i>Protein</dt><dd><strong>70 g</strong><span>20% of calories</span></dd></div><div><dt><i class="bar-carbs" aria-hidden="true"></i>Carbs</dt><dd><strong>200 g</strong><span>56% of calories</span></dd></div><div><dt><i class="bar-fat" aria-hidden="true"></i>Fat</dt><dd><strong>38 g</strong><span>24% of calories</span></dd></div></dl></section></section><aside class="rail" aria-labelledby="kitchen-heading"><div class="section-heading kitchen-heading"><h2 id="kitchen-heading">Kitchen essentials</h2></div><section class="note expiry-card"><div class="expiry-header"><h2>Expiring soon</h2></div><p class="expiry-subtitle">Use these first to reduce waste.</p><div class="expiry-list"><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Spinach-Small.png"/></span><span class="expiry-name">Spinach</span><span class="expiry-badge urgent">Tomorrow</span></div><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Milk-Small.png"/></span><span class="expiry-name">Milk</span><span class="expiry-badge">In 2 days</span></div></div></section><section class="note shopping-card"><a class="shopping-card-link" href="Shopping-list.html"><div class="shopping-header"><h2>Shopping List</h2><span aria-hidden="true">View all</span></div></a><div class="shopping-items"><label>Rolled oats</label><label>Bananas</label><label>Chickpeas</label><label>Brown rice</label><label>Sweet potatoes</label><label>Avocados</label><label>Wholegrain bread</label><label>Lentils</label></div></section><section class="note budget-card"><h2>Weekly budget</h2><div class="budget"><span>BD 12</span> <small>of BD 40</small></div><div aria-label="Estimated grocery spending" aria-valuemax="40" aria-valuemin="0" aria-valuenow="12" class="progress" role="meter"><div></div></div><p class="muted">BD 28 left &middot; estimated groceries</p></section></aside></div></main></div><dialog class="meal-dialog" id="recipe-0" aria-labelledby="recipe-title-0"><div class="dialog-heading"><h2 id="recipe-title-0">Berry yogurt bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>200 g Greek yogurt</li><li>100 g mixed berries</li><li>30 g granola</li><li>1 tsp honey</li></ul><h3>Method</h3><ol><li>Spoon the yogurt into a bowl.</li><li>Wash the berries and add them on top.</li><li>Finish with granola and a drizzle of honey.</li></ol></dialog><dialog class="meal-dialog" id="recipe-1" aria-labelledby="recipe-title-1"><div class="dialog-heading"><h2 id="recipe-title-1">Pesto pasta salad</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>75 g dry pasta</li><li>1 tbsp pesto</li><li>100 g cherry tomatoes</li><li>A handful of baby spinach</li><li>1 tsp olive oil</li></ul><h3>Method</h3><ol><li>Cook the pasta according to its packet, then drain and cool slightly.</li><li>Halve the tomatoes and rinse the spinach.</li><li>Toss the pasta with pesto, olive oil, tomatoes and spinach.</li></ol></dialog><dialog class="meal-dialog" id="recipe-2" aria-labelledby="recipe-title-2"><div class="dialog-heading"><h2 id="recipe-title-2">Tofu veggie bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>150 g firm tofu</li><li>150 g cooked rice</li><li>100 g broccoli</li><li>1 small carrot</li><li>1 tbsp soy sauce</li><li>1 tsp oil</li></ul><h3>Method</h3><ol><li>Pat the tofu dry and cut it into cubes. Slice the carrot and cut the broccoli into florets.</li><li>Heat the oil in a pan and cook the tofu until golden.</li><li>Add the vegetables with a splash of water and cook until tender. Stir in the soy sauce.</li><li>Serve over the cooked rice.</li></ol></dialog><dialog class="meal-dialog week-dialog" id="weekly-plan" aria-labelledby="week-title"><div class="dialog-heading"><h2 id="week-title">Full week plan</h2><button type="button" data-close aria-label="Close weekly plan">&#215;</button></div><p class="dialog-caption">Sample weekly menu, including today's meals.</p><div class="week-table-wrap"><table class="week-table"><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th scope="row">Mon</th><td>Overnight oats</td><td>Chickpea wrap</td><td>Vegetable curry</td></tr><tr class="current-day"><th scope="row">Tue ? Today</th><td>Berry yogurt bowl</td><td>Pesto pasta salad</td><td>Tofu veggie bowl</td></tr><tr><th scope="row">Wed</th><td>Banana toast</td><td>Lentil soup</td><td>Roasted vegetable rice</td></tr><tr><th scope="row">Thu</th><td>Apple porridge</td><td>Hummus wrap</td><td>Chickpea stew</td></tr><tr><th scope="row">Fri</th><td>Scrambled eggs</td><td>Quinoa salad</td><td>Vegetable noodles</td></tr><tr><th scope="row">Sat</th><td>Banana pancakes</td><td>Baked sweet potato</td><td>Bean tacos</td></tr><tr><th scope="row">Sun</th><td>Fruit and oats</td><td>Rice and bean bowl</td><td>Roasted vegetable couscous</td></tr></tbody></table></div></dialog><script>
+<style id="shared-shell-sizing">
+@media(min-width:901px){
+  .shell{width:100%;height:100vh;min-height:0;max-width:none;padding:0;grid-template-columns:220px minmax(0,1fr);gap:0}
+  .sidebar,.main{border-radius:0}
+  .main{height:100%;min-height:0}
+}
+@media(min-width:701px) and (max-width:900px){
+  .shell{width:100%;height:100vh;min-height:0;max-width:none;padding:0;grid-template-columns:170px minmax(0,1fr);gap:0}
+  .sidebar,.main{border-radius:0}
+  .main{height:100%;min-height:0}
+}
+@media(min-width:701px) and (max-height:760px){
+  .shell{height:auto;min-height:100vh}
+  .main{height:auto;min-height:100vh;overflow:visible}
+}
+</style></style></head><body><div class="shell"><aside class="sidebar"><div class="sidebar-brand"><svg class="logo colored-logo" viewBox="0 0 150 36" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Cooked"><path d="M16 11C8 6 2 11 2 20c0 8 6 13 14 13s14-5 14-13c0-9-6-14-14-9Z" fill="#ed664b" stroke="#aa422f" stroke-width="1.2"/><path d="M16 13C12 8 8 8 5 9l7 3-5 3 8-1 5 3-2-5 8-3c-5-1-8 0-10 4Z" fill="#79a869"/><path d="M16 10c-1-3 0-5 2-7" fill="none" stroke="#79a869" stroke-width="2" stroke-linecap="round"/><path d="M7 17c-1 2-1 4 0 6" fill="none" stroke="#ffb096" stroke-width="1.7" stroke-linecap="round"/><text x="40" y="27" fill="#fffdf7" font-family="Segoe UI,Arial,Helvetica,sans-serif" font-size="26" font-weight="700" letter-spacing="-.6">Cooked</text></svg></div><nav aria-label="Main navigation" class="nav"><div class="navitem active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Dashboard</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"/></svg>Meal Planner</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16H6zM6 11h12M9 7v2M9 14v3"/></svg>Fridge</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h2l2 11h9l2-8H7M10 20h.01M17 20h.01"/></svg>Shopping List</div><div class="navitem"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M15 14h3"/></svg>Budget</div></nav></aside><main class="main"><div class="heading"><div></div><div class="header-account"><span class="profile-icon" role="img" aria-label="User profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1a7 7 0 0 1 14 0v1"/></svg></span></div></div><div class="content"><section class="today-section" aria-labelledby="today-heading"><div class="section-heading"><h2 id="today-heading">Today&#8217;s meals</h2></div><div class="meals" id="meals"><article class="meal"><img alt="Overhead photograph of Berry yogurt bowl" src="../assets/images/yogurt.png"/><div class="type">BREAKFAST</div><h3>Berry yogurt bowl</h3><div class="meta">5 min &middot; 320 kcal</div><div class="meal-ingredients">&#129379; Yogurt &nbsp; &#127827; Berries &nbsp; &#127855; Honey</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Pesto pasta salad" src="../assets/images/pasta_dish.png"/><div class="type">LUNCH</div><h3>Pesto pasta salad</h3><div class="meta">25 min &middot; 530 kcal</div><div class="meal-ingredients">&#127837; Pasta &nbsp; &#127807; Pesto &nbsp; &#127813; Tomatoes</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article><article class="meal"><img alt="Overhead photograph of Tofu veggie bowl" src="../assets/images/tofu.png"/><div class="type">DINNER</div><h3>Tofu veggie bowl</h3><div class="meta">20 min &middot; 570 kcal</div><div class="meal-ingredients">&#129480; Tofu &nbsp; &#129382; Broccoli &nbsp; &#127834; Rice</div><div class="actions"><button type="button" class="cook" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg><span class="cook-label">Mark cooked</span><span class="cook-undo" hidden>Undo</span></button></div></article></div><section class="macro-breakdown" aria-labelledby="macro-title"><div class="macro-top"><div><h2 id="macro-title">Daily nutrition</h2><p>Planned meals</p></div><div class="macro-energy"><strong id="cal">1,420</strong><span>kcal total</span></div></div><div class="macro-bar" role="img" aria-label="Estimated calorie breakdown: protein 20 percent, carbs 56 percent, fat 24 percent"><span class="bar-protein" style="flex:20"></span><span class="bar-carbs" style="flex:56"></span><span class="bar-fat" style="flex:24"></span></div><dl class="macro-key"><div><dt><i class="bar-protein" aria-hidden="true"></i>Protein</dt><dd><strong>70 g</strong><span>20% of calories</span></dd></div><div><dt><i class="bar-carbs" aria-hidden="true"></i>Carbs</dt><dd><strong>200 g</strong><span>56% of calories</span></dd></div><div><dt><i class="bar-fat" aria-hidden="true"></i>Fat</dt><dd><strong>38 g</strong><span>24% of calories</span></dd></div></dl></section></section><aside class="rail" aria-labelledby="kitchen-heading"><div class="section-heading kitchen-heading"><h2 id="kitchen-heading">Kitchen essentials</h2></div><section class="note expiry-card"><div class="expiry-header"><h2>Expiring soon</h2></div><p class="expiry-subtitle">Use these first to reduce waste.</p><div class="expiry-list"><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Spinach-Small.png"/></span><span class="expiry-name">Spinach</span><span class="expiry-badge urgent">Tomorrow</span></div><div class="expiry-row"><span class="expiry-image"><img alt="" class="ingredient" src="https://www.themealdb.com/images/ingredients/Milk-Small.png"/></span><span class="expiry-name">Milk</span><span class="expiry-badge">In 2 days</span></div></div></section><section class="note shopping-card"><a class="shopping-card-link" href="Shopping-list.html"><div class="shopping-header"><h2>Shopping List</h2><span aria-hidden="true">View all</span></div></a><div class="shopping-items"><label>Rolled oats</label><label>Bananas</label><label>Chickpeas</label><label>Brown rice</label><label>Sweet potatoes</label><label>Avocados</label><label>Wholegrain bread</label><label>Lentils</label></div></section><section class="note budget-card"><h2>Weekly budget</h2><div class="budget"><span>BD 12</span> <small>of BD 40</small></div><div aria-label="Estimated grocery spending" aria-valuemax="40" aria-valuemin="0" aria-valuenow="12" class="progress" role="meter"><div></div></div><p class="muted">BD 28 left &middot; estimated groceries</p></section></aside></div></main></div><dialog class="meal-dialog" id="recipe-0" aria-labelledby="recipe-title-0"><div class="dialog-heading"><h2 id="recipe-title-0">Berry yogurt bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>200 g Greek yogurt</li><li>100 g mixed berries</li><li>30 g granola</li><li>1 tsp honey</li></ul><h3>Method</h3><ol><li>Spoon the yogurt into a bowl.</li><li>Wash the berries and add them on top.</li><li>Finish with granola and a drizzle of honey.</li></ol></dialog><dialog class="meal-dialog" id="recipe-1" aria-labelledby="recipe-title-1"><div class="dialog-heading"><h2 id="recipe-title-1">Pesto pasta salad</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>75 g dry pasta</li><li>1 tbsp pesto</li><li>100 g cherry tomatoes</li><li>A handful of baby spinach</li><li>1 tsp olive oil</li></ul><h3>Method</h3><ol><li>Cook the pasta according to its packet, then drain and cool slightly.</li><li>Halve the tomatoes and rinse the spinach.</li><li>Toss the pasta with pesto, olive oil, tomatoes and spinach.</li></ol></dialog><dialog class="meal-dialog" id="recipe-2" aria-labelledby="recipe-title-2"><div class="dialog-heading"><h2 id="recipe-title-2">Tofu veggie bowl</h2><button type="button" data-close aria-label="Close recipe">&#215;</button></div><p class="dialog-caption">Simple recipe &middot; 1 serving</p><h3>Ingredients</h3><ul><li>150 g firm tofu</li><li>150 g cooked rice</li><li>100 g broccoli</li><li>1 small carrot</li><li>1 tbsp soy sauce</li><li>1 tsp oil</li></ul><h3>Method</h3><ol><li>Pat the tofu dry and cut it into cubes. Slice the carrot and cut the broccoli into florets.</li><li>Heat the oil in a pan and cook the tofu until golden.</li><li>Add the vegetables with a splash of water and cook until tender. Stir in the soy sauce.</li><li>Serve over the cooked rice.</li></ol></dialog><dialog class="meal-dialog week-dialog" id="weekly-plan" aria-labelledby="week-title"><div class="dialog-heading"><h2 id="week-title">Full week plan</h2><button type="button" data-close aria-label="Close weekly plan">&#215;</button></div><p class="dialog-caption">Sample weekly menu, including today's meals.</p><div class="week-table-wrap"><table class="week-table"><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th scope="row">Mon</th><td>Overnight oats</td><td>Chickpea wrap</td><td>Vegetable curry</td></tr><tr class="current-day"><th scope="row">Tue ? Today</th><td>Berry yogurt bowl</td><td>Pesto pasta salad</td><td>Tofu veggie bowl</td></tr><tr><th scope="row">Wed</th><td>Banana toast</td><td>Lentil soup</td><td>Roasted vegetable rice</td></tr><tr><th scope="row">Thu</th><td>Apple porridge</td><td>Hummus wrap</td><td>Chickpea stew</td></tr><tr><th scope="row">Fri</th><td>Scrambled eggs</td><td>Quinoa salad</td><td>Vegetable noodles</td></tr><tr><th scope="row">Sat</th><td>Banana pancakes</td><td>Baked sweet potato</td><td>Bean tacos</td></tr><tr><th scope="row">Sun</th><td>Fruit and oats</td><td>Rice and bean bowl</td><td>Roasted vegetable couscous</td></tr></tbody></table></div></dialog><script>
+document.querySelectorAll('[data-open]').forEach(button=>button.addEventListener('click',()=>document.getElementById(button.dataset.open).showModal()));
+document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog').close()));
+document.querySelectorAll('.meal-dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}}));
+</script><script id="meal-cooked-interaction">
+(() => {
+  const day = new Date();
+  const dateKey = [day.getFullYear(), day.getMonth() + 1, day.getDate()].join('-');
+  document.querySelectorAll('.meal').forEach(card => {
+    const button = card.querySelector('button.cook');
+    if (!button) return;
+    const name = card.querySelector('h3').textContent.trim();
+    const key = 'cooked:meal:' + dateKey + ':' + name;
+    const render = cooked => {
+      button.classList.toggle('done', cooked);
+      button.setAttribute('aria-pressed', String(cooked));
+      button.setAttribute('aria-label', cooked ? name + ': cooked. Undo marking as cooked' : 'Mark ' + name + ' as cooked');
+      button.querySelector('.cook-label').textContent = cooked ? 'Cooked' : 'Mark cooked';
+      button.querySelector('.cook-undo').hidden = !cooked;
+    };
+    let cooked = false;
+    try { cooked = localStorage.getItem(key) === 'true'; } catch (_) {}
+    render(cooked);
+    button.addEventListener('click', () => {
+      cooked = !cooked;
+      render(cooked);
+      try { localStorage.setItem(key, String(cooked)); } catch (_) {}
+    });
+  });
+})();
+</script><script id="dashboard-navigation">
+(() => {
+  const destinations = {
+    'Meal Planner': 'Meal-planner.html',
+    Fridge: 'Fridge.html',
+    'Shopping List': 'Shopping-list.html',
+    Budget: 'Budget.html'
+  };
+  document.querySelectorAll('.sidebar .navitem').forEach(item => {
+    const destination = destinations[item.textContent.trim()];
+    if (!destination) return;
+    item.setAttribute('role', 'link');
+    item.setAttribute('tabindex', '0');
+    const go = () => { window.location.href = destination; };
+    item.addEventListener('click', go);
+    item.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); go(); }
+    });
+  });
+  document.querySelector('.profile-icon')?.addEventListener('click', () => { window.location.href = 'Profile.html'; });
+})();
+</script></body></html>
+
