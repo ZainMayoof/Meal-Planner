@@ -1,5 +1,6 @@
 (function () {
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const COUNT_UNITS = new Set(["pcs", "bags", "cans", "boxes"]);
   const SKIP_TYPES = ["hidden", "submit", "button", "reset", "image"];
 
   const style = document.createElement("style");
@@ -33,7 +34,14 @@
     }
     if (field.type === "number") {
       const num = Number(value);
-      if (Number.isNaN(num)) return "Enter a valid number.";
+      if (!Number.isFinite(num)) return "Enter a valid number.";
+      if (field.dataset.quantityUnit) {
+        const unit = document.getElementById(field.dataset.quantityUnit);
+        if (num <= 0) return "Quantity must be greater than zero.";
+        if (unit && COUNT_UNITS.has(unit.value) && !Number.isInteger(num)) {
+          return "Enter a whole number for " + unit.options[unit.selectedIndex].text.toLowerCase() + ".";
+        }
+      }
       if (field.min !== "" && num < Number(field.min)) return name + " must be at least " + field.min + ".";
       if (field.max !== "" && num > Number(field.max)) return name + " must be " + field.max + " or less.";
     }
@@ -99,6 +107,21 @@
   }
 
   document.querySelectorAll("form").forEach(setup);
+
+  document.querySelectorAll("[data-quantity-unit]").forEach((quantity) => {
+    const unit = document.getElementById(quantity.dataset.quantityUnit);
+    if (!unit) return;
+    function updateQuantity() {
+      const whole = COUNT_UNITS.has(unit.value);
+      quantity.min = whole ? "1" : "0";
+      quantity.step = whole ? "1" : "any";
+      quantity.placeholder = whole ? "e.g. 3" : "e.g. 1.5";
+      if (quantity.dataset.touched) validateField(quantity);
+    }
+    unit.addEventListener("change", updateQuantity);
+    quantity.form.addEventListener("reset", () => window.setTimeout(updateQuantity, 0));
+    updateQuantity();
+  });
 
   document.addEventListener("focusout", (event) => {
     const field = formOf(event);
