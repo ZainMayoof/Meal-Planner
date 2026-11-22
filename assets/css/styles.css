@@ -230,3 +230,143 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
     justify-content:flex-start;
   }
 }
+
+/* Shared refinement for dense utility pages and navigation. */
+:root{
+  --ink:#18382a;
+  --muted:#607064;
+  --forest:#1f4d3a;
+  --forest-2:#326b52;
+  --mint:#edf3e9;
+  --canvas:#edf0e9;
+  --paper:#fffefa;
+  --line:#d8e1d5;
+}
+
+.sidebar{
+  background:#1d4635;
+}
+
+.nav a{
+  min-height:48px;
+  font-size:14px;
+  line-height:1.25;
+  font-weight:600;
+  color:#dfeae2;
+}
+
+.nav a.active{
+  color:#1d4635;
+  font-weight:700;
+}
+
+.page-head h1{
+  font-size:44px;
+  line-height:1.12;
+  letter-spacing:-1.2px;
+}
+
+.list-row{
+  min-height:72px;
+  padding:14px 16px;
+}
+
+.list-row label strong{
+  font-size:16px;
+  line-height:1.25;
+  color:var(--ink);
+}
+
+.list-row label small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.talabat-item{
+  min-width:68px;
+  text-align:center;
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:8px;
+}
+
+.table th{
+  font-size:12px;
+  letter-spacing:.5px;
+  color:#526153;
+}
+
+.table td{
+  font-size:15px;
+  color:#34483a;
+}
+
+.table td strong{
+  font-size:16px;
+  color:var(--ink);
+}
+
+.table td small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.table td,
+.table th{
+  padding-top:16px;
+  padding-bottom:16px;
+}
+
+.panel h2,
+.panel h3{
+  font-size:18px;
+  color:var(--ink);
+}
+
+.panel p{
+  font-size:14px;
+}
+
+.badge{
+  font-size:12px;
+  padding:5px 10px;
+}
+
+@media (max-width:900px){
+  .nav a{
+    font-size:13px;
+  }
+}
+
+@media (max-width:700px){
+  .nav a{
+    min-height:42px;
+    font-size:12px;
+  }
+  .page-head h1{
+    font-size:36px;
+  }
+  .list-row{
+    min-height:68px;
+    padding:12px;
+  }
+  .list-row label strong{
+    font-size:15px;
+  }
+  .list-row label small{
+    font-size:12px;
+  }
+  .table td{
+    font-size:14px;
+  }
+  .table td strong{
+    font-size:15px;
+  }
+  .table td small{
+    font-size:12px;
+  }
+  .table td,
+  .table th{
+    padding:14px 12px;
+  }
+}

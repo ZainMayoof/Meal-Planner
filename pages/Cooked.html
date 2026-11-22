@@ -621,7 +621,20 @@ document.querySelectorAll('.meal-dialog').forEach(dialog=>dialog.addEventListene
     });
   });
 })();
-</script><script id="dashboard-navigation">
+</script><style id="consistent-dark-green-shell">
+.sidebar{background:#1d4635}
+.sidebar .navitem{min-height:48px;padding:13px 15px;font-size:14px;font-weight:600;line-height:1.25;color:#dfeae2}
+.sidebar .navitem svg{width:20px;height:20px;flex-basis:20px}
+.sidebar .navitem.active{background:#fffefa;color:#1d4635;font-weight:700}
+.sidebar .navitem:hover{background:#ffffff12;color:#fffefa}
+body{background:#edf0e9}
+.main{background:#fffefa}
+@media(max-width:900px){.sidebar .navitem{font-size:13px}}
+@media(max-width:700px){
+  .sidebar .navitem{min-height:42px;font-size:12px;padding:10px 12px}
+  .sidebar .navitem.active{background:#fffefa;color:#1d4635}
+}
+</style><script id="dashboard-navigation">
 (() => {
   const destinations = {
     'Meal Planner': 'Meal-planner.html',
